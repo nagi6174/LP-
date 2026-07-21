@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- スマホで見たときに、パソコン用の画面をそのまま縮小せず、
+     スマホの画面幅に合わせて正しく表示させるための設定（レスポンシブ対応の基本） -->
+
+<title>Be Engineer | 中高生のためのプログラミング講座</title>
+<!-- ここから2つのlinkタグは「Googleフォント」という無料の外部フォントを読み込んでいる部分 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&family=Noto+Sans+JP:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<!-- family=... の部分でフォント名を指定。&で複数のフォントをまとめて読み込める -->
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- ============================================================
+     ヘッダー（ページ上部に固定表示されるロゴ＋メニュー部分）
+     ============================================================ -->
+<header class="site-header" id="top">
+  <!-- id="top" は「ページの一番上」の目印。フッターのロゴから
+       ここへジャンプできるようにするために付けている -->
+
+  <div class="header-inner">
+    <!-- ロゴ部分（クリックするとページ上部に戻る） -->
+    <a href="#top" class="logo">
+      <img src="image2.png" alt="BeEn" width="150" height="65">
+    </a>
+
+    <!-- パソコン画面用のメニュー（スマホでは非表示にしてハンバーガーメニューに切り替える） -->
+    <nav class="main-nav">
+      <!-- href="#about" のように「#」から始まるリンクは、
+           このページの中にある id="about" の場所へジャンプする、という意味 -->
+      <a href="#about">about</a>
+      <a href="#foryou">for you</a>
+      <a href="#beenとは">BeEnとは</a>
+      <a href="#tokucho">BeEnの特徴</a>
+      <a href="#voice">voice</a>
+      <a href="#detail">detail</a>
+    </nav>
+
+    <!-- 右上の赤いボタン。#formへジャンプして申し込みフォームを開く -->
+    <a href="#form" class="btn btn-cta header-cta">無料体験/講座に申し込む</a>
+
+    <!-- スマホ画面でだけ表示される「三本線」のメニューボタン -->
+    <!-- クリックしたときの動きは script.js に書いてある -->
+    <button class="hamburger" id="hamburger" aria-label="メニュー">
+      <span></span><span></span><span></span>
+      <!-- この3つのspanが、CSSで「三本線」の見た目になっている -->
+    </button>
+  </div>
+
+  <!-- スマホ画面でハンバーガーボタンを押すと開く、縦並びのメニュー -->
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="#about">about</a>
+    <a href="#foryou">for you</a>
+    <a href="#beenとは">BeEnとは</a>
+    <a href="#tokucho">BeEnの特徴</a>
+    <a href="#voice">voice</a>
+    <a href="#detail">detail</a>
+    <a href="#form" class="btn btn-cta">無料体験/講座に申し込む</a>
+  </nav>
+</header>
+
+<!-- mainタグ：ヘッダーとフッターを除く「ページ本体」を囲む -->
+<main>
+
+<!-- ============================================================
+     ファーストビュー（最初に見える大きな写真＋見出し部分）
+     ============================================================ -->
+<section class="hero" id="about">
+  <!-- id="about" ＝ ヘッダーの「about」リンクを押すとここに来る -->
+
+  <!-- 写真1枚を敷いた帯。今はまだ本物の写真がないので、
+       style.css の中でグラデーション（色のぼかし）を代わりに敷いている -->
+  <div class="hero-single">
+    <!-- role="img" と aria-label は「これは写真です、内容はこれです」と
+         スクリーンリーダー（読み上げソフト）に伝えるためのもの -->
+
+    <img src="image1.png" alt="パソコンに向かって学習する生徒たちの写真" class="hero-photo-img">
+   </div>
+  </div>
+  <div class="diagonal-divider" aria-hidden="true"></div>
+
+  <!-- 「君のアイデアは、形になる。」から始まる、コース紹介ブロック -->
+  <div class="hero-lead" id="foryou">
+    <!-- id="foryou" ＝ ヘッダーの「for you」リンクの行き先 -->
+
+    <h2>君のアイデアは、形になる。</h2>
+    <p>知識ゼロから「作る楽しさ」を体感する、プログラミング講座</p>
+
+    <!-- 「無料体験」というピンク色の丸いバッジ -->
+    <div class="badge-row"><span class="pill-badge">無料体験</span></div>
+
+    <!-- 2つの体験講座カードを横並びにするための箱 -->
+    <div class="course-cards">
+
+      <!-- 1つ目のカード：バイブコーディング -->
+      <article class="course-card">
+        <!-- articleタグ：「それ単体で意味が完結する内容のかたまり」に使うタグ。カードや記事に向く -->
+        <div class="course-thumb course-thumb--vibe" aria-hidden="true">
+          <span class="thumb-tag">✓ 未経験でも大丈夫</span>
+          <strong>新感覚！証明ゲーム！</strong>
+          <small>〜図形を証明せよ〜</small>
+          <span class="thumb-tag thumb-tag--sm">数学が苦手でも大丈夫</span>
+        </div>
+        <h3>バイブコーディング</h3>
+        <p>AIにこんな機能が欲しいと言葉で伝えるだけ、プログラムが目の前で次々と組み上がります。プログラミングの文法ではなく、何を作りたいかというアイデアの力でアプリを作り上げる、最新の開発スタイルを体験します。</p>
+        <span class="duration">所要時間：60分</span>
+      </article>
+
+      <!-- 2つ目のカード：Webページ開発体験 -->
+      <article class="course-card">
+        <div class="course-thumb course-thumb--web" aria-hidden="true">
+          <span class="thumb-code">&lt;/&gt;</span>
+          <!-- &lt; と &gt; はそれぞれ「<」「>」の文字そのものを表示するための書き方。
+               そのまま < > と書くとタグだと誤解されてしまうため -->
+        </div>
+        <h3>Webページ開発体験</h3>
+        <p>自分だけの自己紹介や趣味のページ作りに挑戦！Webページの仕組みを学び、HTML・CSS・JSという3つの言語を知った上で、実際にHTML・CSSを書き換えて思い通りの見た目に変えていく楽しさを体験します。</p>
+        <span class="duration">所要時間：60分</span>
+      </article>
+    </div>
+
+    <!-- 「基礎講座」バッジ -->
+    <div class="badge-row"><span class="pill-badge">基礎講座</span></div>
+
+    <!-- Pythonマスター講座の大きめカード -->
+    <div class="python-card">
+      <!-- カードの背景にうっすら浮かぶ「Python Html Access」の透かし文字 -->
+      <div class="python-watermark" aria-hidden="true">Python&nbsp;&nbsp;Html&nbsp;&nbsp;Access</div>
+      <div class="python-thumb" aria-hidden="true">
+        <span class="python-thumb-title">Python<br>Master<br>Course</span>
+      </div>
+      <div class="python-body">
+        <h3>Pythonマスター講座</h3>
+        <p>ゲームやアプリ、AIなど幅広く利用されるPythonをわずか2日でマスターします。作りながら学ぶことができるので、楽しみながらマスターすることができます。</p>
+        <span class="duration">所要時間：120分×2コマ×2日間</span>
+      </div>
+      <!-- クリックすると #detail（料金・日程セクション）へジャンプするボタン -->
+      <a href="#detail" class="btn btn-outline-teal python-link">日程などの詳細はこちら</a>
+    </div>
+  </div>
+
+  <!-- 「こんな君に」お悩みリスト部分 -->
+  <div class="worries">
+    <h2>こんな君に</h2>
+    <div class="bubble-grid">
+      <!-- ふきだし風の4つの悩み -->
+      <p class="bubble">プログラミング学びたいけど何から始めたらいいのかわからない…</p>
+      <p class="bubble">どのプログラミング言語を学んだらいいのかわからない…</p>
+      <p class="bubble">プログラミングについて相談できる相手がいない…</p>
+      <p class="bubble">そもそもプログラミングってなに？</p>
+    </div>
+    <!-- 下向き矢印の飾り（CSSで90度回転させて「＞＞」を下向き矢印に見せている） -->
+    <div class="chevron-down" aria-hidden="true">&raquo;</div>
+    <div class="solve-line">
+      <span class="thinking-icon" aria-hidden="true">🤔</span>
+      <p>BeEngineerでは様々な悩みを解決してくれます！</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CTA（行動喚起）バナー その1
+     「CTA」＝ Call To Action。ユーザーに行動（申し込みなど）を
+     促すための、目立つ帯とボタンのこと
+     ============================================================ -->
+<section class="cta-banner">
+  <div class="cta-card">
+    <h2>この夏、君自身に革命を起こそう</h2>
+    <p>
+      君に必要なのは、「やってみたい」という小さな好奇心だけ。<br>
+      難しい知識や特別なスキルは、最初から一切いりません。<br>
+      満席になってしまう前に、まずは気軽に60分の無料体験クラスから、<br>
+      君の新しい未来をスタートさせてみませんか？<br>
+      全国の中高生の仲間が、ここからスタートしています
+    </p>
+    <p class="cta-arrow">↓申し込みはこちらから↓</p>
+    <a href="#form" class="btn btn-cta">無料体験/講座に申し込む</a>
+  </div>
+</section>
+
+<!-- ============================================================
+     「BeEngineerとは？」セクション
+     ============================================================ -->
+<section class="about-section" id="beenとは">
+  <!-- section-title というクラスは、ページ内の大見出し（VOICE・DETAILなど）
+       すべてで共通して使っているデザイン。style.cssで一括管理している -->
+  <h2 class="section-title">BeEngineerとは？</h2>
+
+  <div class="about-card">
+    <div class="about-text">
+      <h3>京大生中心のエンジニアによる<br>実践的な講座</h3>
+      <p>講師は全員、500時間以上のプログラミング研修をクリアし、講師としての指導スキルを獲得した京大生中心のエンジニアです。京大発のITベンチャーで培われた実践的な最新のプログラミング知識を組み込んだ独自のカリキュラムを用いているので、社会で通用するプログラミングスキルを身に着けることができます。</p>
+      <!-- ul + li ＝ 箇条書きリスト。ul=リスト全体の箱、li=1つ1つの項目 -->
+      <ul class="check-list">
+        <li>注目言語のPythonを使用</li>
+        <li>日々アップデートされる教科書</li>
+      </ul>
+    </div>
+    <!-- 右側の写真部分（現在はグラデーションのプレースホルダー） -->
+    <div class="about-photo" aria-hidden="true"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     「BeEngineerで学べること」01/02/03 セクション
+     ============================================================ -->
+<section class="learn-section" id="tokucho">
+  <h2 class="section-title">BeEngineerで学べること</h2>
+
+  <!-- 同じ形（数字＋文章＋写真）のブロックが3つ並んでいる -->
+  <div class="learn-item">
+    <div class="learn-number" aria-hidden="true">01</div>
+    <div class="learn-text">
+      <h3>実践的なITスキル</h3>
+      <p>BeEnではコードを書く技術やエンジニアリングに必須のツールを使う技術、ユーザーのことを考えた設計技術などの実践的なスキルを獲得することができます。実践的なITスキルから将来日本をリードするエンジニアを輩出することを目標にしています。</p>
+    </div>
+    <div class="learn-photo learn-photo--01" aria-hidden="true"></div>
+  </div>
+
+  <div class="learn-item">
+    <div class="learn-number" aria-hidden="true">02</div>
+    <div class="learn-text">
+      <h3>論理的思考力</h3>
+      <p>自らコードを書く中で目的を達成するための手順を筋道立てて考える演習を日常的に行います。順序正しくコードを構築し、エラーの原因を突き止めて解決することを通して論理的に考える習慣を身につけます。このような能力は文系や理系問わない普遍的な課題解決能力です。</p>
+    </div>
+    <div class="learn-photo learn-photo--02" aria-hidden="true"></div>
+  </div>
+
+  <div class="learn-item">
+    <div class="learn-number" aria-hidden="true">03</div>
+    <div class="learn-text">
+      <h3>自己表現力</h3>
+      <p>プログラミングができる中高生がアプリ開発に取り組むことで自分のアイデアを現実化することができます。この過程を通して自分が思い描くものを表現することができるので自己表現力の向上につながり、このような力の分野に関わらず汎用的な成果につながります。</p>
+    </div>
+    <div class="learn-photo learn-photo--03" aria-hidden="true"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     VOICE（受講者の声）＋ 過去の作品紹介セクション
+     ============================================================ -->
+<section class="voice-section" id="voice">
+  <h2 class="section-title">VOICE</h2>
+
+  <!-- 4人分の感想カードを並べる箱 -->
+  <div class="voice-scroll">
+    <article class="voice-card">
+      <div class="voice-avatar" aria-hidden="true">🧑</div>
+      <p class="voice-name">中学3年生　男子<br><span>生徒</span></p>
+      <p class="voice-text">プログラミングの美しさや楽しさを身をもって体験できたことによって、いろいろな物事を真正面からきちんと考えて向き合えるようになりました。また、保護型の授業なので、通学より理解がしやすいです。</p>
+    </article>
+    <article class="voice-card">
+      <div class="voice-avatar" aria-hidden="true">👧</div>
+      <p class="voice-name">高校1年生　女子<br><span>生徒</span></p>
+      <p class="voice-text">プログラミングの基本的な知識が身につき、自らWebサイトを作れるようになりました。毎回の授業で新しくできることが増えてきており、日に見えて成果がわかることが楽しいです。</p>
+    </article>
+    <article class="voice-card">
+      <div class="voice-avatar" aria-hidden="true">👩</div>
+      <p class="voice-name">高校2年生　男子<br><span>保護者</span></p>
+      <p class="voice-text">本人は体験してやってみたいと思っていましたが、やり切れるのかが心配でしたが、実際通い始めると程よく気楽で楽しかったと笑顔で帰ってくるので安心しました。</p>
+    </article>
+    <article class="voice-card">
+      <div class="voice-avatar" aria-hidden="true">🧑‍🎓</div>
+      <p class="voice-name">中学2年生　女子<br><span>生徒</span></p>
+      <p class="voice-text">Webページ作りの授業がとても楽しく、コードで思い通りの見た目を作れた瞬間はとても嬉しかったです。自分で考えながら手を動かすようなWebページ作りが得意になりました。授業を通してタイピングも早くなりました。</p>
+    </article>
+  </div>
+
+  <h2 class="section-title works-title">過去の受講者の作品</h2>
+
+  <!-- テールカラーの枠で囲まれた作品紹介パネル -->
+  <div class="works-panel">
+    <div class="works-grid">
+      <article class="work-card">
+        <div class="work-thumb work-thumb--1" aria-hidden="true"></div>
+        <h3>学校の文化祭のWebサイト</h3>
+        <p>文化祭の出店情報やタイムテーブルをまとめて記載し、実際に学校の生徒全体が活用するWebサイトとして運用してくれました。</p>
+      </article>
+      <article class="work-card">
+        <div class="work-thumb work-thumb--2" aria-hidden="true"></div>
+        <h3>クラスの情報共有ページ</h3>
+        <p>時間割や集会などクラスメイトが情報を確認できるページとして作成し、担任の先生と連携しながら運用してくれています。</p>
+      </article>
+      <article class="work-card">
+        <div class="work-thumb work-thumb--3" aria-hidden="true"></div>
+        <h3>オリジナルタイピングゲーム</h3>
+        <p>漢字や作成したタイピングゲームをアレンジして、自分だけのタイピングゲームを作ってくれました。</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DETAIL（日程・校舎・料金）セクション
+     ここには JavaScript でタブを切り替える仕組みが付いている
+     ============================================================ -->
+<section class="detail-section" id="detail">
+  <h2 class="section-title">DETAIL</h2>
+  <h3 class="detail-sub">日程・校舎</h3>
+
+  <!-- 校舎を選ぶタブボタン。data-campus="..." は
+       「このボタンがどの校舎を表しているか」のメモ書き（JS側で使う目印） -->
+  <div class="campus-tabs" role="tablist">
+    <!-- is-active クラスが付いているボタンが「今選ばれている」見た目になる -->
+    <button class="campus-tab is-active" data-campus="kyodai">京大本校<br><span>（京都）</span></button>
+    <button class="campus-tab" data-campus="umeda">梅田校<br><span>（大阪）</span></button>
+    <button class="campus-tab" data-campus="iidabashi">飯田橋校<br><span>（東京）</span></button>
+    <button class="campus-tab" data-campus="yokohama">横浜校<br><span>（神奈川）</span></button>
+    <button class="campus-tab" data-campus="shuri">首里校<br><span>（沖縄）</span></button>
+  </div>
+
+  <div class="schedule-panel">
+    <!-- 左側：日程リスト -->
+    <div class="schedule-list">
+      <!-- 「無料体験」「講座」を切り替えるトグルボタン -->
+      <div class="schedule-toggle">
+        <button class="toggle-btn is-active" data-type="taiken">無料体験</button>
+        <button class="toggle-btn" data-type="kouza">講座</button>
+      </div>
+      <ul class="schedule-items">
+        <li><span class="s-date">7.5<small>[日]</small></span><span class="s-time">11:00-12:00</span><span class="s-name">Webページ開発体験</span></li>
+        <li><span class="s-date">7.12<small>[日]</small></span><span class="s-time">17:30-18:30</span><span class="s-name">Webページ開発体験</span></li>
+        <li><span class="s-date">8.2<small>[日]</small></span><span class="s-time">12:00-13:00</span><span class="s-name">Webページ開発体験</span></li>
+      </ul>
+    </div>
+    <!-- 右側：地図（今は方眼模様のダミー表示） -->
+    <div class="schedule-map">
+      <div class="map-fake" aria-hidden="true">
+        <div class="map-pin">📍</div>
+      </div>
+      <p class="map-address">
+        住所：〒606-8301<br>
+        京都府京都市左京区吉田泉殿町1-34<br>
+        ダイショウ吉万通ビル１・2F<br>
+        アクセス：出町柳駅から徒歩10分（駐輪場あり）
+      </p>
+    </div>
+  </div>
+
+  <h3 class="detail-sub">料金</h3>
+  <!-- 3つの料金カード。3枚目だけ price-card--gold というクラスを追加して
+       金色の枠で目立たせている -->
+  <div class="price-cards">
+    <div class="price-card">
+      <h4>バイブコーディング</h4>
+      <span class="price-time">60分</span>
+      <span class="price-value">0円</span>
+    </div>
+    <div class="price-card">
+      <h4>Webページ開発体験</h4>
+      <span class="price-time">60分</span>
+      <span class="price-value">0円</span>
+    </div>
+    <div class="price-card price-card--gold">
+      <h4>Pythonマスター講座</h4>
+      <span class="price-time">120分×2コマ×2日間</span>
+      <span class="price-value">20,000円</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FAQ（よくある質問）セクション
+     クリックすると回答が開閉する。開閉の動きは script.js が担当
+     ============================================================ -->
+<section class="faq-section" id="faq">
+  <h2 class="section-title">FAQ</h2>
+  <div class="faq-list">
+
+    <!-- 1つのQ&Aのかたまり = faq-item。
+         faq-q（質問・ボタン）と faq-a（答え・普段は隠れている）のセット -->
+    <div class="faq-item">
+      <button class="faq-q">Q.プログラミング未経験でも参加できますか？<span class="faq-icon">⌄</span></button>
+      <div class="faq-a"><p>はい、大丈夫です。ほとんどの生徒がプログラミング未経験からスタートしています。基礎から丁寧にサポートしますのでご安心ください。</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Q.パソコンを持っていないのですが参加できますか？<span class="faq-icon">⌄</span></button>
+      <div class="faq-a"><p>教室での受講であれば貸出用パソコンをご用意していますので、お持ちでない場合もご参加いただけます。</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Q.無料体験の所要時間はどれくらいですか？<span class="faq-icon">⌄</span></button>
+      <div class="faq-a"><p>無料体験は60分程度を予定しています。内容によって多少前後する場合があります。</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Q.何歳から参加できますか？<span class="faq-icon">⌄</span></button>
+      <div class="faq-a"><p>中学生・高校生を対象としています。学年に応じて内容を調整しますのでお気軽にご相談ください。</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Q.オンラインでも参加できますか？<span class="faq-icon">⌄</span></button>
+      <div class="faq-a"><p>校舎によってはオンライン受講にも対応しています。詳しくはお申し込み時にご相談ください。</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Q.体験後のサポートはありますか？<span class="faq-icon">⌄</span></button>
+      <div class="faq-a"><p>体験後も学習相談や講座選びのサポートを行っておりますので、お気軽にお問い合わせください。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CTAバナー その2（最後の後押し）
+     ============================================================ -->
+<section class="cta-banner cta-banner--final">
+  <div class="cta-card">
+    <h2>さあ、この夏で人生を変えよう。</h2>
+    <p>
+      <!-- span class="highlight" で囲んだ部分だけ、CSSで赤色の太字にしている -->
+      BeEnjineerで手に入るのは、一生モノの「<span class="highlight">創り出すスキル</span>」と、将来の強力な武器になる「<span class="highlight">自分だけのオリジナル作品</span>」です。<br>
+      ただスマホで誰かが作ったゲームを遊ぶだけの夏休みは、もう終わり。<br>
+      講座を受けた後、世界を驚かせる側にまわっているのは君だ。
+    </p>
+    <p class="cta-arrow">最高の夏にするための第一歩を、ここから踏み出そう！</p>
+    <a href="#form" class="btn btn-cta">無料体験/講座に申し込む</a>
+  </div>
+</section>
+
+<!-- ============================================================
+     申し込みフォーム セクション
+     ============================================================ -->
+<section class="form-section" id="form">
+  <h2 class="section-title">申し込みフォーム</h2>
+
+  <!-- formタグ：入力欄をひとまとめにする箱。
+       id="applyForm" は script.js から「この送信ボタンが押されたら」を
+       見つけるための目印 -->
+  <form class="apply-form" id="applyForm">
+
+    <!-- labelタグで input を囲むと、ラベルの文字をクリックしても
+         入力欄にカーソルが入るようになる（使いやすさのための工夫） -->
+    <label class="form-row">
+      <span class="form-label">お名前 <em class="req">必須</em></span>
+      <!-- name="name" は、送信されたデータの中で「これは名前です」と
+           区別するための名前（プログラム的な識別名） -->
+      <!-- required を付けると、空欄のまま送信しようとするとブラウザが止めてくれる -->
+      <input type="text" name="name" required>
+    </label>
+
+    <label class="form-row">
+      <span class="form-label">お名前(ふりがな) <em class="req">必須</em></span>
+      <input type="text" name="kana" required>
+    </label>
+
+    <!-- 学年と学校名を横並びにする箱 -->
+    <div class="form-row form-row--split">
+      <label>
+        <span class="form-label">学年 <em class="req">必須</em></span>
+        <input type="text" name="grade" required>
+      </label>
+      <label>
+        <span class="form-label">学校名 <em class="req">必須</em></span>
+        <input type="text" name="school" required>
+      </label>
+    </div>
+
+    <label class="form-row">
+      <span class="form-label">開催場所 <em class="req">必須</em></span>
+      <input type="text" name="place" required>
+    </label>
+    <label class="form-row">
+      <span class="form-label">参加するイベント <em class="req">必須</em></span>
+      <input type="text" name="event" required>
+    </label>
+    <label class="form-row">
+      <span class="form-label">メール <em class="req">必須</em></span>
+      <!-- type="email" にすると、スマホでは@マークが出るキーボードになったり、
+           メール形式かどうかを簡易チェックしてくれる -->
+      <input type="email" name="email" required>
+    </label>
+    <label class="form-row">
+      <span class="form-label">電話番号 <em class="req">必須</em></span>
+      <!-- type="tel" にすると、スマホでは数字用のキーボードになる -->
+      <input type="tel" name="tel" required>
+    </label>
+
+    <!-- type="submit" のボタンを押すと「フォームを送信する」という動きになる。
+         実際にどこかへ送る処理は書いておらず、script.js で
+         「送信を一旦止めて、完了メッセージだけ表示する」ようにしている -->
+    <button type="submit" class="btn btn-submit">→講座に申し込む</button>
+
+    <!-- 送信後に表示する「ありがとうございました」メッセージ。
+         hidden 属性が付いていると最初は画面に表示されない -->
+    <p class="form-msg" id="formMsg" hidden>お申し込みありがとうございました。内容を確認のうえご連絡いたします。</p>
+  </form>
+</section>
+
+</main>
+<!-- mainタグはここまで -->
+
+<!-- ============================================================
+     フッター（ページ一番下の会社情報部分）
+     ============================================================ -->
+<footer class="site-footer">
+  <a href="#top" class="footer-logo">
+    <span class="logo-sub">Be</span>
+    <span class="logo-main">Engineer</span>
+  </a>
+  <nav class="footer-nav">
+    <span class="footer-nav-label">運営会社</span>
+    <a href="#">株式会社DeMiA</a>
+    <a href="#">株式会社ワオ・コーポレーション</a>
+  </nav>
+  <nav class="footer-nav footer-nav--legal">
+    <a href="#">特定商取引法に基づく表記</a>
+    <a href="#">サービス利用規約</a>
+    <a href="#">プライバシーポリシー</a>
+  </nav>
+  <p class="copyright">Copyright BeEngineer</p>
+</footer>
+
+<!-- ページの一番最後で読み込む。
+     見た目(CSS)が先に表示されたあとに、動き(JS)を追加するのが基本の順番 -->
+<script src="script.js"></script>
+</body>
+</html>
