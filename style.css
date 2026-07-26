@@ -1,0 +1,703 @@
+/* ============================================================
+   Be Engineer LP — スタイルシート（CSS）
+   ------------------------------------------------------------
+   CSSは「HTMLの見た目（色・大きさ・余白・配置など）」を
+   決めるためのファイルです。
+
+   基本の書き方：
+     セレクタ { プロパティ: 値; }
+
+   例：
+     .btn { color: red; }
+     → class="btn" が付いているすべての要素の文字色を赤にする
+
+   このファイルでは最初に「変数（カスタムプロパティ）」をまとめて
+   定義し、それをあちこちで使い回すことで、色やサイズを
+   一括で変更しやすくしています。
+   ============================================================ */
+
+/* ---- 色・フォント・余白などを「変数」としてまとめて定義する ----
+   :root は「ページ全体」を指す特別なセレクタ。
+   ここで定義した --teal-900 のような名前は、
+   下の方で var(--teal-900) と書くことで呼び出せる。
+   同じ色をあちこちに書くと、後で変更するとき全部書き換える
+   必要が出てしまうので、変数にしてまとめて管理している。 */
+:root{
+  --teal-900:#0e4f49;   /* 一番濃いティール色（見出し文字など） */
+  --teal-800:#12665e;
+  --teal-700:#177a70;
+  --teal-600:#1c8f83;
+  --teal-500:#2aa99a;
+  --teal-400:#5cc7b7;
+  --teal-300:#8fdccb;
+  --teal-200:#bdece0;
+  --teal-100:#e2f6f0;   /* 一番薄いティール色（背景など） */
+  --bg-pale:#eaf6f6;    /* セクションの背景色 */
+  --bg-blue-pale:#eef6f8;
+  --pink-600:#ea3f61;   /* CTAボタンなどのピンク色 */
+  --pink-700:#d72c50;
+  --gold-500:#dcae00;   /* 料金カードの金色アクセント */
+  --gold-100:#fdf6dc;
+  --ink:#22322f;        /* 本文の文字色（黒に近い色） */
+  --ink-soft:#4a5a57;   /* 少し薄めの文字色（説明文など） */
+  --white:#ffffff;
+  --radius-lg:22px;     /* カードなどの角丸の大きさ（大） */
+  --radius-md:14px;     /* 角丸（中） */
+  --radius-sm:8px;      /* 角丸（小） */
+  --shadow-card:0 10px 30px rgba(14,79,73,.10); /* カードの影 */
+  --font-display:'M PLUS Rounded 1c', 'Noto Sans JP', sans-serif; /* 見出し用フォント */
+  --font-body:'Noto Sans JP', sans-serif;    /* 本文用フォント */
+  --font-mono:'JetBrains Mono', monospace;   /* コード風の等幅フォント */
+  --maxw:1180px; /* コンテンツの最大幅（これ以上は横に広がらない） */
+
+  --color1:#38BDF8;
+  --color2:#0ABAB5;
+  --bg-color1:#EFF6FF;
+}
+
+/* ---- リセット・共通設定 ----
+   ブラウザは要素ごとに初期値（余白など）が微妙に違うため、
+   最初に共通のルールを決めて表示のズレを防ぐ */
+*,*::before,*::after{
+  box-sizing:border-box;
+  /* box-sizing:border-box にすると、
+     width/heightの中にpaddingとborderの分も含めて計算されるようになり、
+     サイズ計算がシンプルになる（初心者がハマりやすいポイント） */
+}
+html{
+  scroll-behavior:smooth;   /* リンクをクリックしたときページ内をカクッとではなく、なめらかにスクロールする */
+  scroll-padding-top:90px;  /* 固定ヘッダーに見出しが隠れないよう、スクロール時に上の余白を確保する */
+}
+body{
+  margin:0;                 /* ブラウザ標準で付いている外側の余白を消す */
+  font-family:var(--font-body);
+  color:var(--ink);
+  background:var(--bg-color1);
+  -webkit-font-smoothing:antialiased; /* 文字のふちを少し滑らかに見せる */
+  overflow-x:hidden;         /* 横方向にスクロールバーが出てしまうのを防ぐ */
+}
+img{max-width:100%; display:block;} /* 画像が親要素からはみ出さないようにする */
+a{color:inherit; text-decoration:none;} /* リンクの色・下線をリセットして、自分で指定した色を使う */
+ul{list-style:none; margin:0; padding:0;} /* 箇条書きの「・」マークと余白を一旦消す */
+h1,h2,h3,h4{font-family:var(--font-display); margin:0; color:var(--teal-900);}
+p{margin:0; line-height:1.85;} /* line-height：行と行の間の広さ（読みやすさに直結する） */
+button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗せると指マークになる */
+:focus-visible{outline:3px solid var(--pink-600); outline-offset:2px;}
+/* :focus-visible ＝ キーボードのTabキーで要素を選んだときに、
+   ここまで来ていますよ、と分かるように枠線を付ける（アクセシビリティ対応） */
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001ms !important; transition-duration:.001ms !important;}
+}
+/* ↑ 「アニメーションを減らす」設定をしている人（画面酔いしやすい人など）向けに、
+     すべてのアニメーションをほぼ一瞬で終わらせるための配慮 */
+
+/* ---- セクション共通の見出し（VOICE・DETAILなど）のスタイル ---- */
+.section-title{
+  text-align:center;
+  font-size:clamp(28px,4vw,40px);
+  /* clamp(最小,標準,最大) ＝ 画面の幅に応じて自動でサイズを調整しつつ、
+     小さくなりすぎたり大きくなりすぎたりしないようにする便利な書き方 */
+  font-weight:800;
+  color:var(--teal-700);
+  letter-spacing:.04em; /* 文字と文字の間隔を少し広げる */
+  margin-bottom:36px;
+}
+
+/* ============================================================
+   ボタン
+   ============================================================ */
+.btn{
+  display:inline-block;
+  border:none;
+  border-radius:999px; /* 999pxのような大きい値にすると「完全な丸（カプセル型）」になる */
+  font-family:var(--font-display);
+  font-weight:700;
+  cursor:pointer;
+  text-align:center;
+  transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+  /* transition＝プロパティが変化するときに、瞬間ではなく0.18秒かけて滑らかに変化させる */
+}
+.btn-cta{
+  /* 赤（ピンク）のグラデーションがかかった、目立たせたいメインボタン */
+  background:linear-gradient(135deg,var(--pink-600),var(--pink-700));
+  color:#fff;
+  padding:14px 30px;
+  font-size:16px;
+  box-shadow:0 8px 20px rgba(234,63,97,.35);
+}
+.btn-cta:hover{
+  /* :hover＝マウスが乗っているときだけ適用されるスタイル */
+  transform:translateY(-2px); /* 上に2pxだけ浮き上がる演出 */
+  box-shadow:0 12px 26px rgba(234,63,97,.45);
+}
+.header-cta{padding:10px 20px; font-size:13px;} /* ヘッダー内のボタンは少し小さめに上書き */
+.btn-outline-teal{
+  background:#fff;
+  color:var(--teal-700);
+  border:2px solid var(--teal-600);
+  padding:10px 22px;
+  font-size:14px;
+}
+.btn-outline-teal:hover{background:var(--teal-100);}
+.btn-submit{
+  display:block;
+  width:100%;
+  background:linear-gradient(135deg,var(--pink-600),var(--teal-600));
+  color:#fff;
+  padding:16px;
+  font-size:17px;
+  border-radius:999px;
+  margin-top:8px;
+}
+.btn-submit:hover{transform:translateY(-2px);}
+
+/* ============================================================
+   ヘッダー（ページ上部のナビゲーション）
+   ============================================================ */
+.site-header{
+  position:sticky; /* スクロールしても画面上部に張り付いたままになる */
+  top:0;
+  z-index:100; /* 他の要素より手前（上）に重なって表示されるようにする */
+  background:rgba(255,255,255,.92); /* 少し透明な白 */
+  backdrop-filter:blur(8px); /* 背景がうっすら透けて見える「すりガラス」効果 */
+  border-bottom:1px solid var(--teal-100);
+}
+.header-inner{
+  max-width:var(--maxw);
+  margin:0 auto; /* 左右のmarginをautoにすると、要素が中央寄せになる */
+  display:flex; /* 中の要素を横並びにする */
+  align-items:center; /* 横並びにした要素を、縦方向の中央に揃える */
+  gap:22px; /* 並んでいる要素どうしの間隔 */
+  padding:12px 24px;
+}
+.logo{display:flex; flex-direction:column; line-height:1; margin-right:auto; font-family:var(--font-display);}
+/* margin-right:auto ＝ 右側の余白を自動で最大にする ＝ 結果として
+   「これより右にあるものを右端に寄せる」効果が生まれる（メニューを右寄せにするテクニック） */
+.logo-sub{font-size:13px; font-weight:700; color:var(--teal-700);}
+.logo-main{font-size:20px; font-weight:800; color:var(--teal-900); letter-spacing:.01em;}
+.main-nav{display:flex; gap:22px; font-size:14px; font-weight:500; color:var(--ink);}
+.main-nav a{position:relative; padding:4px 0;}
+.main-nav a:hover{color:var(--teal-700);}
+.main-nav a::after{
+  /* ::after ＝ 要素の中身の「あと」に、新しい飾りを追加できる疑似要素。
+     ここではリンクの下に「線」を作っている */
+  content:""; position:absolute; left:0; bottom:-2px; width:0; height:2px;
+  background:var(--teal-500); transition:width .2s ease;
+}
+.main-nav a:hover::after{width:100%;}
+/* ↑ 普段は幅0（見えない）の線を、マウスが乗ったときだけ幅100%まで伸ばす
+     ＝ 下線がスーッと伸びるアニメーションになる */
+
+.hamburger{
+  display:none; /* パソコン画面では非表示。スマホ用のメディアクエリで表示に切り替える */
+  background:none; border:none; width:32px; height:24px; position:relative; flex-shrink:0;
+}
+.hamburger span{
+  position:absolute; left:0; right:0; height:2px; background:var(--teal-900);
+  transition:transform .2s ease, opacity .2s ease;
+}
+.hamburger span:nth-child(1){top:0;}   /* 1本目の線の位置 */
+.hamburger span:nth-child(2){top:11px;} /* 2本目の線の位置 */
+.hamburger span:nth-child(3){top:22px;} /* 3本目の線の位置 */
+/* is-open クラスがJSで付け外しされることで「三本線」→「×印」に変化する */
+.hamburger.is-open span:nth-child(1){transform:translateY(11px) rotate(45deg);}
+.hamburger.is-open span:nth-child(2){opacity:0;} /* 真ん中の線は消す */
+.hamburger.is-open span:nth-child(3){transform:translateY(-11px) rotate(-45deg);}
+
+.mobile-nav{
+  display:none; /* 普段は非表示。JSがis-openを付けると表示される（下の.is-openルール参照） */
+  flex-direction:column; gap:2px; padding:8px 24px 18px;
+  background:#fff; border-top:1px solid var(--teal-100);
+}
+.mobile-nav a{padding:12px 4px; font-size:15px; border-bottom:1px solid var(--teal-100);}
+.mobile-nav .btn{margin-top:12px; text-align:center;}
+
+/* ---- スマホなど画面が狭いときだけ適用されるルール ----
+   @media (max-width:920px) ＝ 画面幅が920px以下のときだけ、
+   { } の中のスタイルが有効になる（レスポンシブ対応の基本の書き方） */
+@media (max-width:920px){
+  .main-nav, .header-cta{display:none;}   /* パソコン用メニューを隠す */
+  .hamburger{display:block;}               /* 代わりにハンバーガーボタンを表示 */
+  .mobile-nav.is-open{display:flex;}       /* JSでis-openが付いたときだけメニューを開く */
+}
+
+/* ============================================================
+   ヒーロー（ファーストビュー：写真＋見出し部分）
+   ============================================================ */
+.hero{
+  background:linear-gradient(180deg,#f4fbfa 0%, var(--bg-pale) 55%, var(--teal-100) 100%);
+  /* linear-gradient(角度, 色1, 色2, ...) ＝ 色から色へ滑らかに変化するグラデーション背景 */
+  padding-bottom:60px;
+}
+
+.hero-single{
+  position:relative;
+  width:100%;
+  max-width:1440px;      /* 写真の実サイズと同じ1440pxを上限にする */
+  aspect-ratio:1440/810; /* 縦横の比率を1440:810（＝16:9）に固定する。
+                            これを指定しておくと、画面幅に合わせて
+                            幅が縮んでも「高さも自動で連動して縮む」ので、
+                            写真が変形せずきれいに収まる */
+  margin:0 auto;
+  overflow:hidden; /* はみ出た部分を切り取って見せない（角の外側にはみ出さないように） */
+
+}
+.hero-photo-img{
+  /* このimgタグを親要素(.hero-single)にぴったり重ねて敷き詰める */
+  position:absolute;
+  inset:0;         /* 上下左右すべて0＝親要素いっぱいに広げる */
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  /* object-fit:cover ＝ 画像の縦横比を保ったまま、
+     枠からはみ出た部分は切り取りつつ、隙間なく敷き詰めてくれる指定。
+     写真そのものが1440×810ぴったりでなくても、
+     見た目上は綺麗に16:9の枠を埋めてくれる */
+  z-index:0;
+}
+.hero-code-bg{
+  /* position:absolute + 親要素の position:relative の組み合わせで、
+     「親要素の中の好きな位置に重ねて配置する」ことができる（よく使うテクニック） */
+  position:absolute; inset:0; /* inset:0 は上下左右すべて0、つまり親要素いっぱいに広げる、という意味 */
+  z-index:1; /* z-index:0 の写真(.hero-photo-img)より手前に表示する */
+  display:flex; flex-direction:column; justify-content:center; gap:10px;
+  padding:20px 40px;
+  font-family:var(--font-mono);
+  font-size:13px;
+  color:rgba(255,255,255,.18); /* 透明度の低い白＝うっすら見える程度にする */
+  white-space:nowrap; /* 文字を折り返さず1行のままにする */
+  pointer-events:none; /* この飾り文字はクリックできないようにする（下の写真やボタンを邪魔しないため） */
+}
+.hero-title{
+  position:relative;
+  z-index:1; /* 上のhero-code-bgより手前に表示されるようにする */
+  color:#fff;
+  text-align:center;
+  font-size:clamp(24px,4vw,38px);
+  font-weight:800;
+  line-height:1.5;
+  text-shadow:0 2px 14px rgba(0,0,0,.5); /* 白文字を写真の上でも読みやすくするための影 */
+  padding:0 24px;
+}
+/* aspect-ratio:1440/810 を指定しているので、
+   スマホで幅が縮んでも高さは自動的に比率通り縮む。
+   そのため「スマホ用に高さを指定し直す」処理はもう不要 */
+
+/* ============================================================
+   斜めにカットされた帯（ヒーロー写真の下のつなぎ目）
+   ============================================================ */
+.diagonal-divider{
+  height: 200px;                 /* 帯の高さ */
+  margin: 0;            /* 写真の下端と少し重ねて、隙間を無くす */
+  position:relative;
+  z-index:2;                   /* 写真より手前に表示する */
+  background:linear-gradient(100deg,var(--color1),var(--color2));
+  clip-path:polygon(0% 0%, 100% 0%, 100% 65%, 0% 100%);
+  /* clip-path:polygon(...) ＝ 四角形の角の位置を指定して、
+     斜めに切り取った形にする。
+     「0 35%」＝左上の角を、上から35%の高さまで下げる
+     　→ これにより上辺が左から右へ斜め上がりの線になる */
+}
+@media (max-width:820px){
+  .diagonal-divider{height:50px; margin-top:-24px;}
+}
+
+.hero-lead{max-width:900px; margin:56px auto 0; padding:0 24px; text-align:center;}
+.hero-lead h2{font-size:clamp(24px,3.6vw,32px); color:var(--teal-800);}
+.hero-lead > p{margin-top:10px; font-size:16px; color:var(--ink-soft);}
+.badge-row{margin:30px 0 26px;}
+.pill-badge{
+  display:inline-block;
+  border:2px solid var(--pink-600);
+  color:var(--pink-600);
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:14px;
+  padding:6px 22px;
+  border-radius:999px;
+  background:#fff;
+}
+
+.course-cards{
+  display:grid; /* grid＝縦横のマス目でレイアウトする仕組み。flexより「表」に近い並べ方が得意 */
+  grid-template-columns:1fr 1fr; /* 列を2つ、幅を1:1の均等割りにする */
+  gap:24px;
+  text-align:left;
+}
+@media (max-width:760px){.course-cards{grid-template-columns:1fr;}}
+/* ↑ スマホでは列を1つにして、2枚のカードを縦積みにする */
+
+.course-card{
+  background:#fff;
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-card);
+  overflow:hidden; /* 角丸からサムネイル画像がはみ出さないようにする */
+  padding-bottom:22px;
+  display:flex; flex-direction:column;
+}
+.course-thumb{
+  height:150px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+  color:#fff; text-align:center; padding:14px;
+}
+.course-thumb--vibe{background:linear-gradient(135deg,#2c3e6b,#5b3e8f);}
+.course-thumb--vibe strong{font-family:var(--font-display); font-size:17px;}
+.course-thumb--vibe small{font-size:11px; opacity:.85;}
+.thumb-tag{font-size:10px; background:rgba(255,255,255,.18); border-radius:999px; padding:2px 10px;}
+.course-thumb--web{background:linear-gradient(135deg,#1b2735,#0e4f49);}
+.thumb-code{font-family:var(--font-mono); font-size:34px; color:var(--teal-300);}
+.course-card h3{padding:18px 20px 4px; font-size:19px; color:var(--teal-800);}
+.course-card p{padding:0 20px; font-size:13.5px; color:var(--ink-soft);}
+.duration{margin:14px 20px 0; font-size:12px; color:var(--teal-600); font-weight:700;}
+
+.python-card{
+  position:relative; /* 中の透かし文字（python-watermark）を絶対配置するための基準にする */
+  margin-top:8px;
+  background:#fff;
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-card);
+  padding:26px;
+  display:grid;
+  grid-template-columns:180px 1fr auto;
+  /* 1列目：固定で180px／2列目：残りのスペースをすべて使う／3列目：中身の分だけの幅 */
+  gap:22px;
+  align-items:center;
+  overflow:hidden;
+  text-align:left;
+}
+@media (max-width:760px){
+  .python-card{grid-template-columns:1fr; text-align:center;} /* スマホでは1列に積む */
+}
+.python-watermark{
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-display); font-weight:800;
+  font-size:52px; color:var(--teal-100);
+  transform:rotate(-18deg) scale(1.3); /* 少し斜めに傾けて拡大し、背景の飾りっぽく見せる */
+  z-index:0; pointer-events:none;
+  white-space:nowrap;
+}
+.python-thumb{
+  position:relative; z-index:1;
+  height:140px; border-radius:var(--radius-md);
+  background:linear-gradient(160deg,#1c1c1c,#0e4f49);
+  display:flex; align-items:center; justify-content:center;
+}
+.python-thumb-title{color:#f2e400; font-family:var(--font-mono); font-weight:700; font-size:15px; text-align:center; line-height:1.3;}
+.python-body{position:relative; z-index:1;}
+.python-body h3{font-size:20px; color:var(--teal-800); margin-bottom:6px;}
+.python-body p{font-size:13.5px; color:var(--ink-soft);}
+.python-body .duration{margin:12px 0 0;}
+.python-link{position:relative; z-index:1; white-space:nowrap;}
+
+/* ---- 「こんな君に」の悩みバブル部分 ---- */
+.worries{max-width:900px; margin:80px auto 0; padding:0 24px; text-align:center;}
+.worries h2{font-size:clamp(24px,3.4vw,30px); color:var(--teal-800); margin-bottom:30px;}
+.bubble-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+@media (max-width:700px){.bubble-grid{grid-template-columns:1fr;}}
+.bubble{
+  position:relative;
+  background:#fff;
+  border:2px solid var(--teal-300);
+  border-radius:999px;
+  padding:16px 26px;
+  font-size:14px;
+  color:var(--ink-soft);
+}
+.chevron-down{
+  margin:34px 0 18px;
+  font-size:34px; line-height:1;
+  color:var(--teal-800);
+  transform:rotate(90deg); /* HTML内の「＞＞」の文字を90度回転させて「下向き矢印」に見せている */
+  display:inline-block;
+  font-weight:800;
+}
+.solve-line{display:flex; align-items:center; justify-content:center; gap:14px;}
+.thinking-icon{font-size:34px;}
+.solve-line p{font-size:19px; font-weight:700; color:var(--pink-600);}
+
+/* ============================================================
+   CTAバナー（斜めストライプ＋グラデーションの目立つ帯）
+   ============================================================ */
+.cta-banner{
+  position:relative;
+  padding:80px 24px;
+  background:
+    /* repeating-linear-gradient ＝ 同じ模様を繰り返す背景。
+       斜めの薄い線（ストライプ）模様を作っている */
+    repeating-linear-gradient(115deg, rgba(255,255,255,.10) 0 26px, rgba(255,255,255,0) 26px 64px),
+    linear-gradient(160deg,var(--teal-400),var(--teal-600) 60%, var(--teal-800));
+  overflow:hidden;
+}
+.cta-card{
+  position:relative;
+  max-width:760px;
+  margin:0 auto;
+  background:#fff;
+  border-radius:var(--radius-lg);
+  padding:46px 40px;
+  text-align:center;
+  box-shadow:0 20px 50px rgba(10,40,38,.25);
+}
+.cta-card h2{font-size:clamp(22px,3.2vw,28px); color:var(--teal-800); margin-bottom:18px;}
+.cta-card p{font-size:14.5px; color:var(--ink-soft);}
+.cta-card .highlight{color:var(--pink-600); font-weight:700;} /* HTML側の<span class="highlight">に対応 */
+.cta-arrow{margin-top:18px; font-weight:700; color:var(--teal-700);}
+.cta-card .btn-cta{margin-top:22px;}
+
+/* ============================================================
+   「BeEngineerとは？」セクション
+   ============================================================ */
+.about-section{
+  position:relative;
+  padding:100px 24px 90px;
+  background:linear-gradient(180deg,var(--teal-100),#fff 70%);
+}
+.about-section::before{
+  /* ::before ＝ 要素の中身の「まえ」に飾りを追加する疑似要素。
+     ここではセクションの継ぎ目に「斜めにカットされた帯」を作っている */
+  content:"";
+  position:absolute; top:-1px; left:0; right:0; height:120px;
+  background:var(--teal-400);
+  clip-path:polygon(0 0,100% 0,100% 30%,0 100%);
+  /* clip-path:polygon(...) ＝ 四角形の一部を切り取って、斜めの形にする */
+}
+.about-card{
+  position:relative;
+  max-width:960px;
+  margin:0 auto;
+  background:#fff;
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-card);
+  padding:40px;
+  display:grid;
+  grid-template-columns:1.3fr 1fr; /* 左：文章（少し広め）／右：写真 */
+  gap:34px;
+  align-items:center;
+}
+@media (max-width:760px){.about-card{grid-template-columns:1fr;}}
+.about-text h3{font-size:clamp(18px,2.4vw,22px); color:var(--teal-700); margin-bottom:16px;}
+.about-text p{font-size:14px; color:var(--ink-soft);}
+.check-list{margin-top:20px;}
+.check-list li{
+  position:relative; padding:8px 0 8px 18px; font-size:14px; font-weight:700; color:var(--ink);
+  border-top:1px solid var(--teal-100);
+}
+.check-list li::before{content:"｜"; position:absolute; left:0; color:var(--teal-500);}
+.about-photo{
+  height:220px; border-radius:var(--radius-md);
+  background:linear-gradient(135deg,#dce9ec,#9fb9c4); /* 写真の代わりのプレースホルダー */
+}
+
+/* ============================================================
+   「BeEngineerで学べること」01/02/03
+   ============================================================ */
+.learn-section{max-width:1000px; margin:0 auto; padding:100px 24px;}
+.learn-item{
+  display:grid;
+  grid-template-columns:100px 1fr 320px; /* 数字／文章／写真の3列 */
+  gap:26px;
+  align-items:center;
+  margin-bottom:70px;
+}
+.learn-item:last-child{margin-bottom:0;} /* 一番最後の項目だけ下の余白を無くす */
+@media (max-width:820px){
+  .learn-item{grid-template-columns:70px 1fr;}
+  .learn-photo{grid-column:1 / -1; order:3;}
+  /* grid-column:1 / -1 ＝ 1列目から最後の列まで全部使う＝横いっぱいに広げる
+     order:3 ＝ 本来の並び順を無視して、一番最後に表示する（スマホでは写真を下に回す） */
+}
+.learn-number{
+  font-family:var(--font-display); font-weight:800;
+  font-size:64px;
+  color:transparent; /* 文字の中身は透明にして… */
+  -webkit-text-stroke:2px var(--teal-300); /* …輪郭線だけ描く＝袋文字（アウトライン文字）にする */
+}
+.learn-text h3{font-size:22px; color:var(--teal-800); margin-bottom:12px;}
+.learn-text p{font-size:14px; color:var(--ink-soft);}
+.learn-photo{height:160px; border-radius:var(--radius-md); background-size:cover; background-position:center;}
+.learn-photo--01{background:linear-gradient(135deg,#c9c2b4,#8f8a7c);}
+.learn-photo--02{background:linear-gradient(135deg,#caa06a,#8a6a3d);}
+.learn-photo--03{background:linear-gradient(135deg,#284a5c,#0f2933);}
+
+/* ============================================================
+   VOICE（受講者の声）＋ 作品紹介
+   ============================================================ */
+.voice-section{padding:90px 24px 100px; background:linear-gradient(180deg,#fff,var(--bg-blue-pale));}
+.voice-scroll{
+  max-width:var(--maxw);
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:repeat(4,1fr); /* 均等幅の列を4つ作る */
+  gap:20px;
+}
+@media (max-width:980px){.voice-scroll{grid-template-columns:repeat(2,1fr);}} /* タブレットは2列 */
+@media (max-width:560px){.voice-scroll{grid-template-columns:1fr;}}          /* スマホは1列 */
+.voice-card{
+  background:#fff;
+  border:2px solid var(--teal-400);
+  border-radius:var(--radius-md);
+  padding:26px 20px;
+  text-align:center;
+}
+.voice-avatar{
+  width:64px; height:64px; margin:0 auto 12px;
+  border-radius:50%; /* 50%にすると正円になる */
+  background:var(--teal-100);
+  display:flex; align-items:center; justify-content:center;
+  font-size:30px;
+}
+.voice-name{font-size:14px; font-weight:700; margin-bottom:10px;}
+.voice-name span{font-weight:400; color:var(--ink-soft);}
+.voice-text{font-size:12.5px; color:var(--ink-soft); text-align:left;}
+
+.works-title{margin-top:80px;}
+.works-panel{
+  max-width:var(--maxw);
+  margin:0 auto;
+  border:2px solid var(--teal-400);
+  border-radius:var(--radius-lg);
+  padding:30px;
+}
+.works-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+@media (max-width:820px){.works-grid{grid-template-columns:1fr;}}
+.work-thumb{height:150px; border-radius:var(--radius-sm); margin-bottom:14px; background-size:cover;}
+.work-thumb--1{background:linear-gradient(160deg,#f7c9d6,#e386a4);}
+.work-thumb--2{background:linear-gradient(160deg,#dff2df,#8fce8f);}
+.work-thumb--3{background:linear-gradient(160deg,#c8e6f5,#3a6fa0);}
+.work-card h3{font-size:15px; color:var(--teal-800); margin-bottom:8px;}
+.work-card p{font-size:12.5px; color:var(--ink-soft);}
+
+/* ============================================================
+   DETAIL（日程・校舎・料金）
+   ============================================================ */
+.detail-section{max-width:var(--maxw); margin:0 auto; padding:100px 24px;}
+.detail-sub{text-align:center; font-size:24px; color:var(--teal-800); margin:0 0 24px;}
+
+.campus-tabs{display:flex; justify-content:center; flex-wrap:wrap; gap:10px; margin-bottom:22px;}
+/* flex-wrap:wrap ＝ 横に並べきれなくなったら自動的に折り返す */
+.campus-tab{
+  background:#fff; border:2px solid var(--teal-300); border-radius:var(--radius-sm);
+  padding:10px 18px; font-size:13px; font-weight:700; color:var(--ink-soft);
+  line-height:1.4; text-align:center;
+}
+.campus-tab span{font-weight:400; font-size:11px;}
+.campus-tab.is-active{background:var(--teal-600); border-color:var(--teal-600); color:#fff;}
+/* is-active クラスは script.js がクリックされたボタンに付け替えている
+   （「今どのタブが選ばれているか」を色で見せるための仕組み） */
+
+.schedule-panel{
+  background:var(--bg-pale);
+  border-radius:var(--radius-lg);
+  padding:30px;
+  display:grid;
+  grid-template-columns:1fr 1fr; /* 左：日程リスト／右：地図 を半分ずつ */
+  gap:26px;
+  margin-bottom:70px;
+}
+@media (max-width:820px){.schedule-panel{grid-template-columns:1fr;}}
+.schedule-toggle{display:flex; gap:10px; margin-bottom:16px;}
+.toggle-btn{
+  flex:1; /* 2つのボタンが均等な幅になるように、余ったスペースを1:1で分け合う */
+  background:#fff; border:2px solid var(--teal-400); border-radius:999px;
+  padding:8px; font-size:13px; font-weight:700; color:var(--teal-700);
+}
+.toggle-btn.is-active{background:var(--teal-500); border-color:var(--teal-500); color:#fff;}
+.schedule-items{background:#fff; border-radius:var(--radius-md); overflow:hidden;}
+.schedule-items li{
+  display:flex; align-items:baseline; gap:14px;
+  padding:14px 18px; border-bottom:1px solid var(--teal-100); font-size:13px;
+}
+.schedule-items li:last-child{border-bottom:none;} /* 一番下の項目だけ区切り線を消す */
+.s-date{font-weight:800; color:var(--pink-600); font-size:15px;}
+.s-date small{font-weight:500; font-size:11px; margin-left:2px;}
+.s-time{color:var(--ink-soft); min-width:96px;}
+.s-name{font-weight:700; color:var(--teal-800);}
+.schedule-map{display:flex; flex-direction:column; gap:14px;}
+.map-fake{
+  height:150px; border-radius:var(--radius-md);
+  /* 方眼紙のような格子模様を作って「地図っぽい」見た目にしているダミー表示 */
+  background:
+    linear-gradient(0deg, rgba(0,0,0,.03) 1px, transparent 1px) 0 0/24px 24px,
+    linear-gradient(90deg, rgba(0,0,0,.03) 1px, transparent 1px) 0 0/24px 24px,
+    #dfeef0;
+  display:flex; align-items:center; justify-content:center; font-size:30px;
+}
+.map-address{font-size:12.5px; color:var(--ink-soft); line-height:1.7;}
+
+.price-cards{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+@media (max-width:760px){.price-cards{grid-template-columns:1fr;}}
+.price-card{
+  background:#fff; border:2px solid var(--teal-200); border-radius:var(--radius-lg);
+  padding:26px; text-align:center;
+}
+.price-card h4{font-size:14px; color:var(--ink); font-weight:700; margin-bottom:14px;}
+.price-time{display:block; font-size:12px; color:var(--ink-soft); margin-bottom:6px;}
+.price-value{display:block; font-size:30px; font-weight:800; color:var(--teal-700); font-family:var(--font-display);}
+.price-card--gold{border-color:var(--gold-500); background:var(--gold-100);} /* 3枚目のカードだけ金色に */
+.price-card--gold .price-value{color:var(--gold-500);}
+
+/* ============================================================
+   FAQ（よくある質問）アコーディオン
+   ============================================================ */
+.faq-section{max-width:820px; margin:0 auto; padding:0 24px 100px;}
+.faq-item{border-bottom:1px solid var(--teal-200);}
+.faq-q{
+  width:100%; display:flex; justify-content:space-between; align-items:center; gap:12px;
+  background:none; border:none; text-align:left;
+  padding:18px 4px; font-size:14.5px; font-weight:700; color:var(--ink);
+}
+.faq-icon{flex-shrink:0; color:var(--teal-600); font-size:18px; transition:transform .2s ease;}
+.faq-item.is-open .faq-icon{transform:rotate(180deg);}
+/* is-open クラスがJSで付くと矢印アイコンが180度回転して「上向き」になる */
+.faq-a{
+  max-height:0; /* 普段は高さ0にして中身を隠している */
+  overflow:hidden;
+  transition:max-height .25s ease; /* 高さが変わるときだけ0.25秒かけてアニメーションする */
+}
+/* faq-a の実際の高さ（scrollHeight）は script.js が計算して
+   インラインスタイル（style="max-height:...px"）として直接書き込んでいる */
+.faq-a p{padding:0 4px 18px; font-size:13.5px; color:var(--ink-soft);}
+
+/* CTAバナー2つ目だけ色味を少し変えるための上書き用クラス */
+.cta-banner--final{
+  background:
+    repeating-linear-gradient(115deg, rgba(255,255,255,.10) 0 26px, rgba(255,255,255,0) 26px 64px),
+    linear-gradient(160deg,var(--teal-300),var(--teal-500) 55%, var(--teal-700));
+}
+
+/* ============================================================
+   申し込みフォーム
+   ============================================================ */
+.form-section{max-width:640px; margin:0 auto; padding:100px 24px 110px;}
+.apply-form{display:flex; flex-direction:column; gap:20px;} /* 入力欄を縦に並べ、間隔を空ける */
+.form-row{display:flex; flex-direction:column; gap:8px;} /* ラベルと入力欄を縦に並べる */
+.form-row--split{flex-direction:row; gap:16px;} /* 学年・学校名だけは横並びに上書き */
+.form-row--split label{flex:1; display:flex; flex-direction:column; gap:8px;}
+.form-label{font-size:14px; font-weight:700; color:var(--ink);}
+.req{
+  background:var(--pink-600); color:#fff; font-style:normal; font-size:10px;
+  padding:2px 8px; border-radius:4px; margin-left:6px; font-weight:700;
+}
+input{
+  border:1.5px solid var(--teal-200); border-radius:var(--radius-sm);
+  padding:12px 14px; font-size:14px; font-family:inherit; color:var(--ink);
+  background:#fbfefe;
+}
+input:focus{border-color:var(--teal-500);} /* クリックして入力中の欄だけ枠線の色を変える */
+.form-msg{margin-top:6px; text-align:center; color:var(--teal-700); font-weight:700; font-size:14px;}
+@media (max-width:520px){.form-row--split{flex-direction:column;}} /* スマホでは学年・学校名も縦積みに */
+
+/* ============================================================
+   フッター
+   ============================================================ */
+.site-footer{background:var(--teal-900); color:#dff1ee; text-align:center; padding:50px 24px 30px;}
+.footer-logo{display:inline-flex; flex-direction:column; margin-bottom:22px; font-family:var(--font-display);}
+.footer-logo .logo-sub{color:var(--teal-300); font-size:13px; font-weight:700;}
+.footer-logo .logo-main{color:#fff; font-size:20px; font-weight:800;}
+.footer-nav{display:flex; justify-content:center; flex-wrap:wrap; gap:20px; font-size:12.5px; margin-bottom:10px;}
+.footer-nav-label{color:var(--teal-300); font-weight:700;}
+.footer-nav a:hover{color:var(--teal-300);}
+.footer-nav--legal{margin-bottom:26px; opacity:.85;}
+.copyright{font-size:11px; color:var(--teal-300); opacity:.8;}
