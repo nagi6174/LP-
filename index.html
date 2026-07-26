@@ -7,11 +7,7 @@
      スマホの画面幅に合わせて正しく表示させるための設定（レスポンシブ対応の基本） -->
 
 <title>Be Engineer | 中高生のためのプログラミング講座</title>
-<!-- ここから2つのlinkタグは「Googleフォント」という無料の外部フォントを読み込んでいる部分 -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&family=Noto+Sans+JP:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-<!-- family=... の部分でフォント名を指定。&で複数のフォントをまとめて読み込める -->
-
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -98,24 +94,18 @@
 
       <!-- 1つ目のカード：バイブコーディング -->
       <article class="course-card">
-        <!-- articleタグ：「それ単体で意味が完結する内容のかたまり」に使うタグ。カードや記事に向く -->
-        <div class="course-thumb course-thumb--vibe" aria-hidden="true">
-          <span class="thumb-tag">✓ 未経験でも大丈夫</span>
-          <strong>新感覚！証明ゲーム！</strong>
-          <small>〜図形を証明せよ〜</small>
-          <span class="thumb-tag thumb-tag--sm">数学が苦手でも大丈夫</span>
-        </div>
-        <h3>バイブコーディング</h3>
-        <p>AIにこんな機能が欲しいと言葉で伝えるだけ、プログラムが目の前で次々と組み上がります。プログラミングの文法ではなく、何を作りたいかというアイデアの力でアプリを作り上げる、最新の開発スタイルを体験します。</p>
-        <span class="duration">所要時間：60分</span>
-      </article>
+         <div class="course-thumb course-thumb--vibe">
+           <img src="image3.jpg" alt="新感覚！証明ゲーム！〜図形を証明せよ〜のゲーム画面のスクリーンショット">
+         </div>
+         <h3>バイブコーディング</h3>
+         <p>AIにこんな機能が欲しいと言葉で伝えるだけで、プログラムが目の前で次々と組み上がります。プログラミングの文法ではなく、何を作りたいかというアイデアの力でアプリを作り上げる、最新の開発スタイルを体験します。</p>
+         <span class="duration">所要時間：60分</span>
+       </article>
 
       <!-- 2つ目のカード：Webページ開発体験 -->
       <article class="course-card">
-        <div class="course-thumb course-thumb--web" aria-hidden="true">
-          <span class="thumb-code">&lt;/&gt;</span>
-          <!-- &lt; と &gt; はそれぞれ「<」「>」の文字そのものを表示するための書き方。
-               そのまま < > と書くとタグだと誤解されてしまうため -->
+        <div class="course-thumb course-thumb--web">
+          <img src="image4.png" alt="コードが表示されたノートパソコンの写真">
         </div>
         <h3>Webページ開発体験</h3>
         <p>自分だけの自己紹介や趣味のページ作りに挑戦！Webページの仕組みを学び、HTML・CSS・JSという3つの言語を知った上で、実際にHTML・CSSを書き換えて思い通りの見た目に変えていく楽しさを体験します。</p>
@@ -124,22 +114,16 @@
     </div>
 
     <!-- 「基礎講座」バッジ -->
-    <div class="badge-row"><span class="pill-badge">基礎講座</span></div>
-
-    <!-- Pythonマスター講座の大きめカード -->
-    <div class="python-card">
-      <!-- カードの背景にうっすら浮かぶ「Python Html Access」の透かし文字 -->
-      <div class="python-watermark" aria-hidden="true">Python&nbsp;&nbsp;Html&nbsp;&nbsp;Access</div>
-      <div class="python-thumb" aria-hidden="true">
-        <span class="python-thumb-title">Python<br>Master<br>Course</span>
-      </div>
-      <div class="python-body">
+         <div class="badge-row"><span class="pill-badge">基礎講座</span></div>
+    <div class="course-cards" style="grid-template-columns: 1fr; max-width: 500px; margin: 0 auto;">
+      <article class="course-card" style="margin: 0;">
+        <div class="course-thumb course-thumb--python">
+          <img src="image5.png" alt="Pythonマスター講座">
+        </div>
         <h3>Pythonマスター講座</h3>
         <p>ゲームやアプリ、AIなど幅広く利用されるPythonをわずか2日でマスターします。作りながら学ぶことができるので、楽しみながらマスターすることができます。</p>
         <span class="duration">所要時間：120分×2コマ×2日間</span>
-      </div>
-      <!-- クリックすると #detail（料金・日程セクション）へジャンプするボタン -->
-      <a href="#detail" class="btn btn-outline-teal python-link">日程などの詳細はこちら</a>
+      </article>
     </div>
   </div>
 

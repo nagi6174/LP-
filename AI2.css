@@ -1,3 +1,27 @@
+/* ============================================================
+   Be Engineer LP — スタイルシート（CSS）
+   ------------------------------------------------------------
+   CSSは「HTMLの見た目（色・大きさ・余白・配置など）」を
+   決めるためのファイルです。
+
+   基本の書き方：
+     セレクタ { プロパティ: 値; }
+
+   例：
+     .btn { color: red; }
+     → class="btn" が付いているすべての要素の文字色を赤にする
+
+   このファイルでは最初に「変数（カスタムプロパティ）」をまとめて
+   定義し、それをあちこちで使い回すことで、色やサイズを
+   一括で変更しやすくしています。
+   ============================================================ */
+
+/* ---- 色・フォント・余白などを「変数」としてまとめて定義する ----
+   :root は「ページ全体」を指す特別なセレクタ。
+   ここで定義した --teal-900 のような名前は、
+   下の方で var(--teal-900) と書くことで呼び出せる。
+   同じ色をあちこちに書くと、後で変更するとき全部書き換える
+   必要が出てしまうので、変数にしてまとめて管理している。 */
 :root{
   --teal-900:#0e4f49;   /* 一番濃いティール色（見出し文字など） */
   --teal-800:#12665e;
@@ -22,11 +46,9 @@
   --radius-sm:8px;      /* 角丸（小） */
   --shadow-card:0 10px 30px rgba(14,79,73,.10); /* カードの影 */
   --font-display:'M PLUS Rounded 1c', 'Noto Sans JP', sans-serif; /* 見出し用フォント */
-  --font-body:'Gothic A1', sans-serif;    /* 本文用フォント */
+  --font-body:'Noto Sans JP', sans-serif;    /* 本文用フォント */
   --font-mono:'JetBrains Mono', monospace;   /* コード風の等幅フォント */
   --maxw:1180px; /* コンテンツの最大幅（これ以上は横に広がらない） */
-
-  --band-h: clamp(200px, 25vw, 360px);
 
   --color1:#38BDF8;
   --color2:#0ABAB5;
@@ -149,11 +171,6 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   gap:22px; /* 並んでいる要素どうしの間隔 */
   padding:12px 24px;
 }
-.logo{display:flex; flex-direction:column; line-height:1; margin-right:auto; font-family:var(--font-display);}
-/* margin-right:auto ＝ 右側の余白を自動で最大にする ＝ 結果として
-   「これより右にあるものを右端に寄せる」効果が生まれる（メニューを右寄せにするテクニック） */
-.logo-sub{font-size:13px; font-weight:700; color:var(--teal-700);}
-.logo-main{font-size:20px; font-weight:800; color:var(--teal-900); letter-spacing:.01em;}
 .main-nav{display:flex; gap:22px; font-size:14px; font-weight:500; color:var(--ink);}
 .main-nav a{position:relative; padding:4px 0;}
 .main-nav a:hover{color:var(--teal-700);}
@@ -204,8 +221,7 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
    ヒーロー（ファーストビュー：写真＋見出し部分）
    ============================================================ */
 .hero{
-  background:linear-gradient(180deg,#f4fbfa 0%, var(--bg-pale) 55%, var(--teal-100) 100%);
-  /* linear-gradient(角度, 色1, 色2, ...) ＝ 色から色へ滑らかに変化するグラデーション背景 */
+  
   padding-bottom:60px;
 }
 
@@ -266,10 +282,10 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
    斜めにカットされた帯（ヒーロー写真の下のつなぎ目）
    ============================================================ */
 .diagonal-divider{
-  height:var(--band-h);
-  margin-top:clamp(-40px, -2.78vw, -24px);    /* 1440px時点で-40pxになる割合 */
+  height: 200px;                 /* 帯の高さ */
+  margin: 0;            /* 写真の下端と少し重ねて、隙間を無くす */
   position:relative;
-  z-index:2;                  /* 写真より手前に表示する */
+  z-index:2;                   /* 写真より手前に表示する */
   background:linear-gradient(100deg,var(--color1),var(--color2));
   clip-path:polygon(0% 0%, 100% 0%, 100% 65%, 0% 100%);
   /* clip-path:polygon(...) ＝ 四角形の角の位置を指定して、
@@ -281,38 +297,21 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   .diagonal-divider{height:50px; margin-top:-24px;}
 }
 
-@media (max-width:820px){
-  :root{ --band-h:50px; }
-  .diagonal-divider{margin-top:-24px;}
-}
-
-.hero-lead{max-width:900px;
-  margin-top: calc(var(--band-h) * -0.85); 
-  margin-left:auto; margin-right:auto; 
-  padding:0 24px;
-  text-align:center;
-  position:relative;
-  z-index:3;}
-.hero-lead h2{font-size:clamp(32px, 12.87px + 2.53vw, 50px); color:var(--bg-color1);}
-.hero-lead > p{margin-top:10px; font-size:clamp(18px, -2.17px + 2.65vw, 36px); color:var(--ink-soft);  }
+.hero-lead{max-width:900px; margin:56px auto 0; padding:0 24px; text-align:center;}
+.hero-lead h2{font-size:clamp(24px,3.6vw,32px); color:var(--teal-800);}
+.hero-lead > p{margin-top:10px; font-size:16px; color:var(--ink-soft);}
 .badge-row{margin:30px 0 26px;}
 .pill-badge{
   display:inline-block;
-  border:4px solid var(--pink-600);
+  border:2px solid var(--pink-600);
   color:var(--pink-600);
   font-family:var(--font-display);
   font-weight:700;
-  font-size:36px;
-  padding:6px 40px;
+  font-size:14px;
+  padding:6px 22px;
   border-radius:999px;
   background:#fff;
 }
-
-@media (max-width:760px){
-  .hero-lead h2{font-size:24px;}
-  .hero-lead > p{font-size:14px;}
-}
-
 
 .course-cards{
   display:grid; /* grid＝縦横のマス目でレイアウトする仕組み。flexより「表」に近い並べ方が得意 */
@@ -324,26 +323,17 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
 /* ↑ スマホでは列を1つにして、2枚のカードを縦積みにする */
 
 .course-card{
-  aspect-ratio:500/550;
   background:#fff;
-  border-radius:32px;              /* ← 22px→32pxで、もっと丸くする */
-  box-shadow:0 16px 40px rgba(14,79,73,.16); /* ← 影を少し強く・広く */
-  padding:28px;
-  margin:0 30px;
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-card);
+  overflow:hidden; /* 角丸からサムネイル画像がはみ出さないようにする */
+  padding-bottom:22px;
   display:flex; flex-direction:column;
-  gap:18px;
 }
 .course-thumb{
-  flex:1;
-  min-height:0;
-  border-radius:20px;
-  overflow:hidden;      /* ← 追加：中の写真の角も一緒に丸める */
-  background:var(--teal-100); /* 写真が読み込めなかったときの保険の背景色 */
-}
-.course-thumb img{
-  width:100%;
-  height:100%;
-  object-fit:cover;     /* 写真の比率を保ったまま、枠いっぱいに敷き詰める */
+  height:150px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+  color:#fff; text-align:center; padding:14px;
 }
 .course-thumb--vibe{background:linear-gradient(135deg,#2c3e6b,#5b3e8f);}
 .course-thumb--vibe strong{font-family:var(--font-display); font-size:17px;}
@@ -351,24 +341,9 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
 .thumb-tag{font-size:10px; background:rgba(255,255,255,.18); border-radius:999px; padding:2px 10px;}
 .course-thumb--web{background:linear-gradient(135deg,#1b2735,#0e4f49);}
 .thumb-code{font-family:var(--font-mono); font-size:34px; color:var(--teal-300);}
-.course-card h3{
-  padding:0;
-  font-size:clamp(20px, 2.22vw, 32px); /* ← 19px固定から、大きめの可変サイズに */
-  font-weight:400;
-  color:var(--ink); 
-  text-align:center; 
-}
-.course-card p{
-  padding:0;
-  font-size:clamp(14px, 1.1vw, 16px);
-  color:var(--ink-soft);
-}
-.duration{
-  margin:0;
-  font-size:clamp(12px, .9vw, 14px);
-  color:var(--ink-soft);   /* 画像ではピンクや緑ではなく、落ち着いた色に見えるため */
-  font-weight:400;
-}
+.course-card h3{padding:18px 20px 4px; font-size:19px; color:var(--teal-800);}
+.course-card p{padding:0 20px; font-size:13.5px; color:var(--ink-soft);}
+.duration{margin:14px 20px 0; font-size:12px; color:var(--teal-600); font-weight:700;}
 
 .python-card{
   position:relative; /* 中の透かし文字（python-watermark）を絶対配置するための基準にする */
