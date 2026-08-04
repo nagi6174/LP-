@@ -73,7 +73,7 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
 /* ---- セクション共通の見出し（VOICE・DETAILなど）のスタイル ---- */
 .section-title{
   text-align:center;
-  font-size:clamp(28px,4vw,40px);
+  font-size:clamp(1.75rem, 1.266rem + 2.07vw, 3.125rem);
   /* clamp(最小,標準,最大) ＝ 画面の幅に応じて自動でサイズを調整しつつ、
      小さくなりすぎたり大きくなりすぎたりしないようにする便利な書き方 */
   font-weight:800;
@@ -100,7 +100,7 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   /* 赤（ピンク）のグラデーションがかかった、目立たせたいメインボタン */
   background:linear-gradient(135deg,var(--pink-600),var(--pink-700));
   color:#fff;
-  padding:14px 30px;
+  padding:14px 300px;
   font-size:16px;
   box-shadow:0 8px 20px rgba(234,63,97,.35);
 }
@@ -121,7 +121,7 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
 .btn-submit{
   display:block;
   width:100%;
-  background:linear-gradient(135deg,var(--pink-600),var(--teal-600));
+  background:var(--pink-600);
   color:#fff;
   padding:16px;
   font-size:17px;
@@ -563,7 +563,7 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
 }
 .cta-card{
   position:relative;
-  max-width:760px;
+  max-width:1000px;
   margin:0 auto;
   background:#fff;
   border-radius:var(--radius-lg);
@@ -571,34 +571,36 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   text-align:center;
   box-shadow:0 20px 50px rgba(10,40,38,.25);
 }
-.cta-card h2{font-size:clamp(22px,3.2vw,28px); color:var(--teal-800); margin-bottom:18px;}
-.cta-card p{font-size:14.5px; color:var(--ink-soft);}
+.cta-card h2{font-size:clamp(2rem, 1.912rem + 0.38vw, 2.25rem); color:var(--teal-800); margin-bottom:18px;}
+.cta-card p{font-size:clamp(1rem, 0.824rem + 0.75vw, 1.5rem); color:var(--ink-soft);}
 .cta-card .highlight{color:var(--pink-600); font-weight:700;} /* HTML側の<span class="highlight">に対応 */
 .cta-arrow{margin-top:18px; font-weight:700; color:var(--teal-700);}
 .cta-card .btn-cta{margin-top:22px;}
 
+
+.same-bg{ background-image: url('rectangle 58.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  background-position: center 40px;
+}
 /* ============================================================
    「BeEngineerとは？」セクション
    ============================================================ */
 .about-section{
   position:relative;
   padding:100px 24px 90px;
-  background:var(--bg-color1);
+
 }
-.about-section::before{
-  /* ::before ＝ 要素の中身の「まえ」に飾りを追加する疑似要素。
-     ここではセクションの継ぎ目に「斜めにカットされた帯」を作っている */
-  content:"";
-  position:absolute; top:-1px; left:0; right:0; height:120px;
-  background:var(--teal-400);
-  clip-path:polygon(0 0,100% 0,100% 30%,0 100%);
-  /* clip-path:polygon(...) ＝ 四角形の一部を切り取って、斜めの形にする */
-}
+.about-section h2{color:#fff;}
 
 /* --- アコーディオン全体 --- */
 .acc-item {
-  border-bottom: 1px solid #e5e7eb; /* 各項目の下線 */
-  padding: 16px 0;
+  position: relative;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 16px 0 16px 20px;
 }
 .acc-item:first-child {
   padding-top: 0;
@@ -608,43 +610,61 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
 }
 
 /* --- クリックする見出し部分 --- */
-.acc-title {
-  position: relative;
-  padding-left: 14px; /* 左の線との隙間 */
+.acc-title{
   margin: 0;
   font-size: 1.1rem;
   font-weight: bold;
-  color: #17635c; /* 文字色（濃い緑） */
-  cursor: pointer; /* マウスを乗せると指マークになる */
+  color: #b7c2c0;
+  cursor: pointer;
+  transition: color .25s ease;
+}
+.acc-item.is-active .acc-title{
+  color: #10c2bc;
+  font-size: 1.8rem;
 }
 
-/* 見出し左側の水色の縦線（｜） */
-.acc-title::before {
-  content: "";
+/* バーの土台（薄いグレー） */
+.acc-bar{
   position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  left: 0; 
+  top: 4px;
+  bottom: 3px;
   width: 3px;
-  height: 80%;
-  background-color: #a3cac8; 
+  background: #e5e7eb;
+  overflow: hidden;
+}
+/* バーの塗り。is-activeが付いた瞬間だけ時間をかけて伸びる */
+.acc-bar-fill{
+  display: block;
+  width: 100%;
+  height: 0%;
+  background: #0ABAB5;
+}
+.acc-item.is-active .acc-bar-fill{
+  animation: accProgress var(--rotate-ms, 4000ms) linear forwards;
+}
+@keyframes accProgress{
+  from{ height: 0%; }
+  to{ height: 100%; }
 }
 
 /* --- 説明文エリア --- */
 .acc-content {
-  display: none; /* 最初は隠しておく */
-  padding-top: 14px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .3s ease;
+  padding-top: 0;
 }
 .acc-content p {
   margin: 0;
-  font-size: 0.95rem;
+  font-size: 16px;
   line-height: 1.6;
   color: #555;
 }
 
 /* --- 開いているとき（is-active）の指定 --- */
 .acc-item.is-active .acc-content {
-  display: block; /* is-active が付いている項目だけ表示する */
+  padding-top: 14px;
 }
 
 .about-card{
@@ -679,6 +699,8 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
    ============================================================ */
 .learn-section{max-width:1000px; margin:0 auto; padding:100px 24px;}
 .learn-item{
+  background:rgb(255 255 255 / 50%);
+  padding:10px 30px;
   display:grid;
   grid-template-columns:100px 1fr 320px; /* 数字／文章／写真の3列 */
   gap:26px;
@@ -736,103 +758,129 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
 .voice-name span{font-weight:400; color:var(--ink-soft);}
 .voice-text{font-size:12.5px; color:var(--ink-soft); text-align:left;}
 
-.works-title{margin-top:80px;}
-.works-panel{
-  max-width:var(--maxw);
-  margin:0 auto;
-  border:2px solid var(--teal-400);
-  border-radius:var(--radius-lg);
-  padding:30px;
+
+.works-section { padding: 90px 0px 0px; }
+.works-title { margin-top: 80px; text-align: center; } 
+.works-panel {
+  background: #fff;
+  margin: 0 auto;
+  border: 4px solid var(--teal-400);
+  padding: 50px 100px;  
+ 
 }
-.works-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
-@media (max-width:820px){.works-grid{grid-template-columns:1fr;}}
-.work-thumb{height:150px; border-radius:var(--radius-sm); margin-bottom:14px; background-size:cover;}
-.work-thumb--1{background:linear-gradient(160deg,#f7c9d6,#e386a4);}
-.work-thumb--2{background:linear-gradient(160deg,#dff2df,#8fce8f);}
-.work-thumb--3{background:linear-gradient(160deg,#c8e6f5,#3a6fa0);}
-.work-card h3{font-size:15px; color:var(--teal-800); margin-bottom:8px;}
-.work-card p{font-size:12.5px; color:var(--ink-soft);}
+
+.works-grid {
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 40px;
+}
+.work-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-sm, 8px);
+  overflow: hidden; 
+  margin-bottom: 14px;
+}
+.work-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.work-card h3 { 
+  font-size: 20px; 
+  color: var(--teal-800); 
+  margin-bottom: 8px; 
+}
+.work-card p { 
+  font-size: 16px; 
+  color: var(--ink-soft); 
+  line-height: 1.6; 
+}
+@media (max-width: 820px) {
+  .works-section {
+    padding: 60px 16px; 
+  }
+  .works-title {
+    margin-top: 40px; 
+  }
+  .works-panel {
+    padding: 32px 20px; 
+  }
+  .works-grid {
+    grid-template-columns: 1fr; 
+    gap: 40px; 
+  }
+  .work-thumb {
+    aspect-ratio: 16 / 9;
+  }
+}
 
 /* ============================================================
    DETAIL（日程・校舎・料金）
    ============================================================ */
-.detail-section{max-width:var(--maxw); margin:0 auto; padding:100px 24px;}
-.detail-sub{text-align:center; font-size:24px; color:var(--teal-800); margin:0 0 24px;}
 
-.campus-tabs{display:flex; justify-content:center; flex-wrap:wrap; gap:10px; margin-bottom:22px;}
-/* flex-wrap:wrap ＝ 横に並べきれなくなったら自動的に折り返す */
-.campus-tab{
-  background:#fff; border:2px solid var(--teal-300); border-radius:var(--radius-sm);
-  padding:10px 18px; font-size:13px; font-weight:700; color:var(--ink-soft);
-  line-height:1.4; text-align:center;
-}
-.campus-tab span{font-weight:400; font-size:11px;}
-.campus-tab.is-active{background:var(--teal-600); border-color:var(--teal-600); color:#fff;}
-/* is-active クラスは script.js がクリックされたボタンに付け替えている
-   （「今どのタブが選ばれているか」を色で見せるための仕組み） */
 
-.schedule-panel{
-  background:var(--bg-pale);
-  border-radius:var(--radius-lg);
-  padding:30px;
-  display:grid;
-  grid-template-columns:1fr 1fr; /* 左：日程リスト／右：地図 を半分ずつ */
-  gap:26px;
-  margin-bottom:70px;
+.detail-section{max-width:var(--maxw); margin:0 auto; padding:60px 20px; text-align:center;}
+.detail-table{width:100%; background:#fff; border-radius:var(--radius-md); overflow:hidden; box-shadow:var(--shadow-card); text-align:center; padding:40px; margin: 0 auto;}
+.detail-subtitle{font-size:48px; color:var(--teal-800); margin-bottom:20px;}
+.detail-school{display:flex; justify-content:center; gap:30px; }
+.detail-school button {background:none; border:none; border-bottom:5px solid #0ABAB5; cursor:pointer; padding:12px 12px 0 12px; font-size:24px; font-weight:450}
+.detail-school button.active {
+  position: relative;
+  background-color:rgb(10 186 181 / 5%);
+  border-radius: 8px 8px 0 0;
+  font-weight: 550;
+  font-size:28px;
 }
-@media (max-width:820px){.schedule-panel{grid-template-columns:1fr;}}
-.schedule-toggle{display:flex; gap:10px; margin-bottom:16px;}
-.toggle-btn{
-  flex:1; /* 2つのボタンが均等な幅になるように、余ったスペースを1:1で分け合う */
-  background:#fff; border:2px solid var(--teal-400); border-radius:999px;
-  padding:8px; font-size:13px; font-weight:700; color:var(--teal-700);
+.detail-school button.active::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-top: 8px solid #008080;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
 }
-.toggle-btn.is-active{background:var(--teal-500); border-color:var(--teal-500); color:#fff;}
-.schedule-items{background:#fff; border-radius:var(--radius-md); overflow:hidden;}
-.schedule-items li{
-  display:flex; align-items:baseline; gap:14px;
-  padding:14px 18px; border-bottom:1px solid var(--teal-100); font-size:13px;
-}
-.schedule-items li:last-child{border-bottom:none;} /* 一番下の項目だけ区切り線を消す */
-.s-date{font-weight:800; color:var(--pink-600); font-size:15px;}
-.s-date small{font-weight:500; font-size:11px; margin-left:2px;}
-.s-time{color:var(--ink-soft); min-width:96px;}
-.s-name{font-weight:700; color:var(--teal-800);}
-.schedule-map{display:flex; flex-direction:column; gap:14px;}
-.map-fake{
-  height:150px; border-radius:var(--radius-md);
-  /* 方眼紙のような格子模様を作って「地図っぽい」見た目にしているダミー表示 */
-  background:
-    linear-gradient(0deg, rgba(0,0,0,.03) 1px, transparent 1px) 0 0/24px 24px,
-    linear-gradient(90deg, rgba(0,0,0,.03) 1px, transparent 1px) 0 0/24px 24px,
-    #dfeef0;
-  display:flex; align-items:center; justify-content:center; font-size:30px;
-}
-.map-address{font-size:12.5px; color:var(--ink-soft); line-height:1.7;}
+.school-detail{background:rgb(10 186 181 / 5%); border-radius:var(--radius-md); padding:30px; margin-top:20px; display:flex; gap:50px; align-items:flex-start; padding:20px; justify-content: center;}
+.lesson-calendar{background:#fff; border:2px solid #0A605E; border-radius:var(--radius-md); padding:20px; flex:1;}
+.lesson-calendar .sun{color:#ff0000;}
+.toggle-switch{display:inline-flex; border:2px solid #0A605E; border-radius:999px; padding:3px; background:#fff;}
+.toggle-option{border:none; background:transparent; padding:6px 16px; font-size:16px; font-weight:bold; color:#0A605E; cursor:pointer; transition:all 0.2s ease;}
+.toggle-option.active{background:#0A605E; color:#fff; border-radius:999px;} 
+.lesson-detail{display:flex; justify-content:flex-start; align-items:center; padding:24px 0; margin:0 10px; border-bottom:1px solid var(--teal-200); gap:20px; text-align:center;}
+.lesson-detail:last-child{border-bottom:none;}
+.lesson-time{font-size:24px; text-align:left;}
+.lesson-name{font-size:20px;}
+.school-map{background:#fff; border:2px solid #0A605E; border-radius:var(--radius-md); padding:20px;  flex:1; text-align:left;}
+.school-map iframe{width:100%; height:220px; border-radius:var(--radius-md);}
 
-.price-cards{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
-@media (max-width:760px){.price-cards{grid-template-columns:1fr;}}
-.price-card{
-  background:#fff; border:2px solid var(--teal-200); border-radius:var(--radius-lg);
-  padding:26px; text-align:center;
-}
-.price-card h4{font-size:14px; color:var(--ink); font-weight:700; margin-bottom:14px;}
-.price-time{display:block; font-size:12px; color:var(--ink-soft); margin-bottom:6px;}
-.price-value{display:block; font-size:30px; font-weight:800; color:var(--teal-700); font-family:var(--font-display);}
-.price-card--gold{border-color:var(--gold-500); background:var(--gold-100);} /* 3枚目のカードだけ金色に */
-.price-card--gold .price-value{color:var(--gold-500);}
+.detail-price{display:flex; gap:60px; margin-top:20px; justify-content:center;}
+.price-card1{flex:1; border-radius:50px; padding:20px; text-align:center;
+  background:linear-gradient(#fff,#fff) padding-box, linear-gradient(135deg,#636363 0%,#F1F1F1 33%,#B9B9B9 100%) border-box; border:5px solid transparent;}
+.price-card1 h2{font-size:24px; margin:20px 0;}
+.price-card1 p{font-size:20px; margin:30px 20px; padding:5px 0; border-bottom:3px solid #0A605E;}
+.price-card1 h1{font-size:48px; margin-bottom:20px;}
+.price-card2{flex:1; border-radius:50px; padding:20px; text-align:center;
+  background:linear-gradient(#fff,#fff) padding-box, linear-gradient(135deg,#D99730 9%,#FFFAB4 53%,#FFD84B 80%) border-box; border:5px solid transparent;}
+.price-card2 h2{font-size:24px; margin:20px 0;}
+.price-card2 p{font-size:20px; margin:30px 20px; padding:5px 0; border-bottom:3px solid #0A605E;}
+.price-card2 h1{font-size:48px; margin-bottom:20px;}
+
+
 
 /* ============================================================
    FAQ（よくある質問）アコーディオン
    ============================================================ */
-.faq-section{max-width:820px; margin:0 auto; padding:0 24px 100px;}
-.faq-item{border-bottom:1px solid var(--teal-200);}
+.faq-section{max-width:1000px; margin:0 auto; padding:0 24px 100px;}
+.faq-item{border:3px solid #000; background:#fff;margin:20px 0; border-radius:50px;}
 .faq-q{
   width:100%; display:flex; justify-content:space-between; align-items:center; gap:12px;
   background:none; border:none; text-align:left;
-  padding:18px 4px; font-size:14.5px; font-weight:700; color:var(--ink);
+  padding:18px 30px; font-size:20px; font-weight:500; color:var(--ink);
 }
-.faq-icon{flex-shrink:0; color:var(--teal-600); font-size:18px; transition:transform .2s ease;}
+.faq-icon{flex-shrink:0; color:var(--teal-600); font-size:40px; transition:transform .2s ease;}
 .faq-item.is-open .faq-icon{transform:rotate(180deg);}
 /* is-open クラスがJSで付くと矢印アイコンが180度回転して「上向き」になる */
 .faq-a{
@@ -842,14 +890,9 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
 }
 /* faq-a の実際の高さ（scrollHeight）は script.js が計算して
    インラインスタイル（style="max-height:...px"）として直接書き込んでいる */
-.faq-a p{padding:0 4px 18px; font-size:13.5px; color:var(--ink-soft);}
+.faq-a p{padding:0 20px 18px; margin:0 20px; font-size:20px; color:var(--ink-soft); }
 
-/* CTAバナー2つ目だけ色味を少し変えるための上書き用クラス */
-.cta-banner--final{
-  background:
-    repeating-linear-gradient(115deg, rgba(255,255,255,.10) 0 26px, rgba(255,255,255,0) 26px 64px),
-    linear-gradient(160deg,var(--teal-300),var(--teal-500) 55%, var(--teal-700));
-}
+
 
 /* ============================================================
    申し込みフォーム

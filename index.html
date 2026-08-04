@@ -30,7 +30,7 @@
            このページの中にある id="about" の場所へジャンプする、という意味 -->
       <a href="#about">about</a>
       <a href="#foryou">for you</a>
-      <a href="#beenとは">BeEnとは</a>
+      <a href="#about-been">BeEnとは</a>
       <a href="#tokucho">BeEnの特徴</a>
       <a href="#voice">voice</a>
       <a href="#detail">detail</a>
@@ -51,7 +51,7 @@
   <nav class="mobile-nav" id="mobileNav">
     <a href="#about">about</a>
     <a href="#foryou">for you</a>
-    <a href="#beenとは">BeEnとは</a>
+    <a href="#about-been">BeEnとは</a>
     <a href="#tokucho">BeEnの特徴</a>
     <a href="#voice">voice</a>
     <a href="#detail">detail</a>
@@ -181,7 +181,7 @@
   <div class="cta-card">
     <h2>この夏、君自身に革命を起こそう</h2>
     <p>
-      君に必要なのは、「やってみたい」という小さな好奇心だけ。<br>
+      君に必要なのは、<span class="highlight">「やってみたい」という小さな好奇心</span>だけ。<br>
       難しい知識や特別なスキルは、最初から一切いりません。<br>
       満席になってしまう前に、まずは気軽に60分の無料体験クラスから、<br>
       君の新しい未来をスタートさせてみませんか？<br>
@@ -192,10 +192,12 @@
   </div>
 </section>
 
+
+<div class="same-bg">
 <!-- ============================================================
      「BeEngineerとは？」セクション
      ============================================================ -->
-<section class="about-section" id="beenとは">
+<section class="about-section" id="about-been">
   <!-- section-title というクラスは、ページ内の大見出し（VOICE・DETAILなど）
        すべてで共通して使っているデザイン。style.cssで一括管理している -->
   <h2 class="section-title">BeEngineerとは？</h2>
@@ -205,7 +207,8 @@
     
     <!-- 1つ目の項目（data-imageに1枚目の画像ファイル名を指定） -->
     <div class="acc-item is-active" data-image="about1.jpg">
-      <h3 class="acc-title">京大生中心のエンジニアによる<br>実践的な講座</h3>
+      <span class="acc-bar"><span class="acc-bar-fill"></span></span>
+      <h3 class="acc-title"> 京大生中心のエンジニアによる<br>実践的な講座</h3>
       <div class="acc-content">
         <p>講師は全員、500時間以上のプログラミング研修をクリアし、講師としての指導スキルを獲得した京大生を中心とするエンジニアです。 京大発のITベンチャーで培われた実践的で最新のプログラミング知識を詰め込んだ独自カリキュラムを用いているので、社会で通用するプログラミングスキルを身に着けることができます。</p>
       </div>
@@ -213,6 +216,7 @@
 
     <!-- 2つ目の項目（data-imageに2枚目の画像ファイル名を指定） -->
     <div class="acc-item" data-image="about2.jpg">
+      <span class="acc-bar"><span class="acc-bar-fill"></span></span>
       <h3 class="acc-title">注目言語のPythonを使用</h3>
       <div class="acc-content">
         <p>「Python」は、多くの企業で採用されており、「YouTube」「Instagram」といった有名なアプリの開発に使われている言語です。
@@ -223,6 +227,7 @@ Webアプリから機械学習まで広く実装できる上、文法が比較�
 
     <!-- 3つ目の項目（data-imageに3枚目の画像ファイル名を指定） -->
     <div class="acc-item" data-image="about3.jpg">
+      <span class="acc-bar"><span class="acc-bar-fill"></span></span>
       <h3 class="acc-title">日々アップデートされる教科書</h3>
       <div class="acc-content">
         <p>Webでの教科書を採用することで最新の技術を日々更新しています。
@@ -275,7 +280,7 @@ Webアプリから機械学習まで広く実装できる上、文法が比較�
     <div class="learn-photo learn-photo--03" aria-hidden="true"></div>
   </div>
 </section>
-
+</div>
 <!-- ============================================================
      VOICE（受講者の声）＋ 過去の作品紹介セクション
      ============================================================ -->
@@ -305,27 +310,37 @@ Webアプリから機械学習まで広く実装できる上、文法が比較�
       <p class="voice-text">Webページ作りの授業がとても楽しく、コードで思い通りの見た目を作れた瞬間はとても嬉しかったです。自分で考えながら手を動かすようなWebページ作りが得意になりました。授業を通してタイピングも早くなりました。</p>
     </article>
   </div>
+</section>
 
+<section class="works-section">
   <h2 class="section-title works-title">過去の受講者の作品</h2>
-
-  <!-- テールカラーの枠で囲まれた作品紹介パネル -->
   <div class="works-panel">
     <div class="works-grid">
+
       <article class="work-card">
-        <div class="work-thumb work-thumb--1" aria-hidden="true"></div>
+        <div class="work-thumb">
+          <img src="work1.png" alt="学校の文化祭のWebサイトの画面">
+        </div>
         <h3>学校の文化祭のWebサイト</h3>
         <p>文化祭の出店情報やタイムテーブルをまとめて記載し、実際に学校の生徒全体が活用するWebサイトとして運用してくれました。</p>
       </article>
+
       <article class="work-card">
-        <div class="work-thumb work-thumb--2" aria-hidden="true"></div>
+        <div class="work-thumb">
+          <img src="work2.png" alt="クラスの情報共有ページの画面">
+        </div>
         <h3>クラスの情報共有ページ</h3>
-        <p>時間割や集会などクラスメイトが情報を確認できるページとして作成し、担任の先生と連携しながら運用してくれています。</p>
+        <p>時間割や案内など、クラスメイトが情報を確認できるページとして作成し、担任の先生と連携しながら運営してくれています。</p>
       </article>
+
       <article class="work-card">
-        <div class="work-thumb work-thumb--3" aria-hidden="true"></div>
+        <div class="work-thumb">
+          <img src="work3.png" alt="オリジナルタイピングゲームの画面">
+        </div>
         <h3>オリジナルタイピングゲーム</h3>
-        <p>漢字や作成したタイピングゲームをアレンジして、自分だけのタイピングゲームを作ってくれました。</p>
+        <p>講習で作成したタイピングゲームをアレンジして、自分だけのタイピングゲームを作ってくれました。</p>
       </article>
+
     </div>
   </div>
 </section>
@@ -336,65 +351,60 @@ Webアプリから機械学習まで広く実装できる上、文法が比較�
      ============================================================ -->
 <section class="detail-section" id="detail">
   <h2 class="section-title">DETAIL</h2>
-  <h3 class="detail-sub">日程・校舎</h3>
-
-  <!-- 校舎を選ぶタブボタン。data-campus="..." は
-       「このボタンがどの校舎を表しているか」のメモ書き（JS側で使う目印） -->
-  <div class="campus-tabs" role="tablist">
-    <!-- is-active クラスが付いているボタンが「今選ばれている」見た目になる -->
-    <button class="campus-tab is-active" data-campus="kyodai">京大本校<br><span>（京都）</span></button>
-    <button class="campus-tab" data-campus="umeda">梅田校<br><span>（大阪）</span></button>
-    <button class="campus-tab" data-campus="iidabashi">飯田橋校<br><span>（東京）</span></button>
-    <button class="campus-tab" data-campus="yokohama">横浜校<br><span>（神奈川）</span></button>
-    <button class="campus-tab" data-campus="shuri">首里校<br><span>（沖縄）</span></button>
-  </div>
-
-  <div class="schedule-panel">
-    <!-- 左側：日程リスト -->
-    <div class="schedule-list">
-      <!-- 「無料体験」「講座」を切り替えるトグルボタン -->
-      <div class="schedule-toggle">
-        <button class="toggle-btn is-active" data-type="taiken">無料体験</button>
-        <button class="toggle-btn" data-type="kouza">講座</button>
+  <div class="detail-table">
+    <div class="date-and-school">
+      <h3 class="detail-subtitle">日程・校舎</h3>
+      <div class="detail-school">
+        <button class="active">京大本校<br>（京都）</button>
+        <button>梅田校<br>（大阪）</button>
+        <button>飯田橋校<br>（東京）</button>
+        <button>横浜校<br>（神奈川）</button>
+        <button>首里校<br>（沖縄）</button>
       </div>
-      <ul class="schedule-items">
-        <li><span class="s-date">7.5<small>[日]</small></span><span class="s-time">11:00-12:00</span><span class="s-name">Webページ開発体験</span></li>
-        <li><span class="s-date">7.12<small>[日]</small></span><span class="s-time">17:30-18:30</span><span class="s-name">Webページ開発体験</span></li>
-        <li><span class="s-date">8.2<small>[日]</small></span><span class="s-time">12:00-13:00</span><span class="s-name">Webページ開発体験</span></li>
-      </ul>
-    </div>
-    <!-- 右側：地図（今は方眼模様のダミー表示） -->
-    <div class="schedule-map">
-      <div class="map-fake" aria-hidden="true">
-        <div class="map-pin">📍</div>
+      <div class="school-detail">
+        <div class="lesson-calendar">
+          <div class="toggle-switch">
+            <button class="toggle-option active">無料体験</button>
+            <button class="toggle-option">基礎講座</button>
+          </div>
+          <div class="lesson-detail">
+            <div class="lesson-time">7/5[<span class="sun">日</span>]<br>11:00-12:00</div>
+            <div class="lesson-name">Webページ開発体験</div>
+          </div>
+          <div class="lesson-detail">
+            <div class="lesson-time">7/12[<span class="sun">日</span>]<br>17:30-18:30</div>
+            <div class="lesson-name">Webページ開発体験</div>
+          </div>
+          <div class="lesson-detail">
+            <div class="lesson-time">8/2[<span class="sun">日</span>]<br>12:00-13:00</div>
+            <div class="lesson-name">Webページ開発体験</div>
+          </div>
+        </div>
+        <div class="school-map">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3267.133323975503!2d135.7787923!3d35.028394399999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x600109202dca3be5%3A0x47f35e4463f2494d!2sBeEngineer!5e0!3m2!1sja!2sjp!4v1785578956786!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          <p><br>住所:〒606-8301<br>京都府京都市左京区吉田泉殿町1-34<br>ダイショウ百万遍ビル1・2F</p>
+          <br>
+          <p>アクセス:出町柳駅から徒歩10分（駐輪場あり）</p>
+        </div>
       </div>
-      <p class="map-address">
-        住所：〒606-8301<br>
-        京都府京都市左京区吉田泉殿町1-34<br>
-        ダイショウ吉万通ビル１・2F<br>
-        アクセス：出町柳駅から徒歩10分（駐輪場あり）
-      </p>
     </div>
-  </div>
-
-  <h3 class="detail-sub">料金</h3>
-  <!-- 3つの料金カード。3枚目だけ price-card--gold というクラスを追加して
-       金色の枠で目立たせている -->
-  <div class="price-cards">
-    <div class="price-card">
-      <h4>バイブコーディング</h4>
-      <span class="price-time">60分</span>
-      <span class="price-value">0円</span>
-    </div>
-    <div class="price-card">
-      <h4>Webページ開発体験</h4>
-      <span class="price-time">60分</span>
-      <span class="price-value">0円</span>
-    </div>
-    <div class="price-card price-card--gold">
-      <h4>Pythonマスター講座</h4>
-      <span class="price-time">120分×2コマ×2日間</span>
-      <span class="price-value">20,000円</span>
+    <h3 class="detail-subtitle">料金</h3>
+    <div class="detail-price">
+      <div class="price-card1">
+        <h2>バイブコーディング</h2>
+        <p>60分</p>
+        <h1>0円</h1>
+      </div>
+      <div class="price-card1">
+        <h2>Webページ開発体験</h2>
+        <p>60分</p>
+        <h1>0円</h1>
+      </div>
+      <div class="price-card2">
+        <h2>Pythonマスター講座</h2>
+        <p>120分×2コマ×二日間</p>
+        <h1>20,000円</h1>
+      </div>
     </div>
   </div>
 </section>
@@ -411,27 +421,30 @@ Webアプリから機械学習まで広く実装できる上、文法が比較�
          faq-q（質問・ボタン）と faq-a（答え・普段は隠れている）のセット -->
     <div class="faq-item">
       <button class="faq-q">Q.プログラミング未経験でも参加できますか？<span class="faq-icon">⌄</span></button>
-      <div class="faq-a"><p>はい、大丈夫です。ほとんどの生徒がプログラミング未経験からスタートしています。基礎から丁寧にサポートしますのでご安心ください。</p></div>
+      <div class="faq-a"><p>A.参加歓迎です。<br>プログラミングの知識がなくとも体験できるイベントを開催しています。</p></div>
     </div>
     <div class="faq-item">
       <button class="faq-q">Q.パソコンを持っていないのですが参加できますか？<span class="faq-icon">⌄</span></button>
-      <div class="faq-a"><p>教室での受講であれば貸出用パソコンをご用意していますので、お持ちでない場合もご参加いただけます。</p></div>
+      <div class="faq-a"><p>A.PCはこちらで無料貸出を行っております。安心してご参加ください。</p></div>
     </div>
     <div class="faq-item">
       <button class="faq-q">Q.無料体験の所要時間はどれくらいですか？<span class="faq-icon">⌄</span></button>
-      <div class="faq-a"><p>無料体験は60分程度を予定しています。内容によって多少前後する場合があります。</p></div>
+      <div class="faq-a"><p>A.無料体験開始から終了まで1時間程度を予定しております。</p></div>
     </div>
     <div class="faq-item">
       <button class="faq-q">Q.何歳から参加できますか？<span class="faq-icon">⌄</span></button>
-      <div class="faq-a"><p>中学生・高校生を対象としています。学年に応じて内容を調整しますのでお気軽にご相談ください。</p></div>
+      <div class="faq-a"><p>A.中学1年生〜高校3年生までのお子様を対象とした無料体験、講座となります。<br>
+それ以外のお子様は参加ができません。<br>
+ご容赦のほどお願いいたします。</p></div>
     </div>
     <div class="faq-item">
       <button class="faq-q">Q.オンラインでも参加できますか？<span class="faq-icon">⌄</span></button>
-      <div class="faq-a"><p>校舎によってはオンライン受講にも対応しています。詳しくはお申し込み時にご相談ください。</p></div>
+      <div class="faq-a"><p>A.対面のみとなります。ご了承ください。</p></div>
     </div>
     <div class="faq-item">
       <button class="faq-q">Q.体験後のサポートはありますか？<span class="faq-icon">⌄</span></button>
-      <div class="faq-a"><p>体験後も学習相談や講座選びのサポートを行っておりますので、お気軽にお問い合わせください。</p></div>
+      <div class="faq-a"><p>A.体験後、ご希望の方にはサポートを行っております。
+夏の基礎講座に参加したい、BeEngineerへの入会を考えている等、気になることがありましたらお気軽に相談ください。</p></div>
     </div>
   </div>
 </section>

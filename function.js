@@ -66,15 +66,26 @@ const accTitles = document.querySelectorAll('.acc-title');
 const accItems = document.querySelectorAll('.acc-item');   // ← 追加：項目一覧をまとめて取得
 const aboutImg = document.getElementById('aboutImg');
 
-const AUTO_ROTATE_MS = 4000; // 自動で切り替わる間隔（ミリ秒）。4000 = 4秒
+const AUTO_ROTATE_MS = 8000; // 自動で切り替わる間隔（ミリ秒）。
+document.documentElement.style.setProperty('--rotate-ms', AUTO_ROTATE_MS + 'ms');
 let rotateTimer = null;      // setIntervalのIDを覚えておくための箱
 
 // クリック時と自動切り替え時、両方から呼び出す共通の「開く」処理
 function openAccordionItem(itemToOpen) {
   if (itemToOpen.classList.contains('is-active')) return;
 
-  accItems.forEach(item => item.classList.remove('is-active'));
+  accItems.forEach(item => {
+    item.classList.remove('is-active');
+    item.querySelector('.acc-content').style.maxHeight = null; // 閉じる項目は高さを0に戻す
+
+    const fill = item.querySelector('.acc-bar-fill');
+    fill.style.animation = '';  // 'none'指定を解除して、CSSのanimationルールに戻す
+    fill.style.height = '';     // 100%固定を解除して、CSSのheight:0%に戻す
+  });
+
   itemToOpen.classList.add('is-active');
+  const content = itemToOpen.querySelector('.acc-content');
+  content.style.maxHeight = content.scrollHeight + 'px'; // 開く項目は実際の高さをセット
 
   const newImageSrc = itemToOpen.getAttribute('data-image');
   aboutImg.style.opacity = 0;
@@ -83,7 +94,6 @@ function openAccordionItem(itemToOpen) {
     aboutImg.style.opacity = 1;
   }, 300);
 }
-
 // 「次の項目」を開く（末尾まで行ったら最初に戻る）
 function openNextItem() {
   const items = Array.from(accItems);
@@ -101,10 +111,21 @@ function startAutoRotate() {
 // クリックされたときの処理
 accTitles.forEach(title => {
   title.addEventListener('click', () => {
+    const clickedItem = title.parentElement;
     openAccordionItem(title.parentElement);
-    startAutoRotate(); // ユーザーが手動で選んだら、そこからまた4秒カウントし直す
+    clearInterval(rotateTimer); 
+
+    // クリックされた項目のバーだけ、アニメーションを解除して即座に満タン(100%)にする
+    const fill = clickedItem.querySelector('.acc-bar-fill');
+    fill.style.animation = 'none'; // CSS側のanimationを一旦無効化
+    fill.style.height = '100%';    // 高さを直接100%に固定する
   });
 });
 
 // ページを開いたら自動ローテーションを開始
 startAutoRotate();
+const initialItem = document.querySelector('.acc-item.is-active');
+if (initialItem) {
+  const initialContent = initialItem.querySelector('.acc-content');
+  initialContent.style.maxHeight = initialContent.scrollHeight + 'px';
+}
