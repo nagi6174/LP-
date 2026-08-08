@@ -291,7 +291,7 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   color:var(--pink-600);
   font-family:var(--font-display);
   font-weight:700;
-  font-size:36px;
+  font-size:clamp(1.063rem, 0.644rem + 1.78vw, 2.25rem);
   padding:6px 40px;
   border-radius:999px;
   background:#fff;
@@ -772,16 +772,6 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   overflow: hidden;
 }
 
-/* タイトル（VOICE） */
-.section-title {
-  text-align: center;
-  font-size: 36px;
-  font-weight: 800;
-  color: #12797d; /* タイトルのカラー */
-  margin-bottom: 40px;
-  letter-spacing: 0.05em;
-}
-
 /* スクロールコンテナ */
 .voice-scroll {
   width: 100%;             /* 画面横幅いっぱいに広げる */
@@ -986,7 +976,7 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
 
 .detail-section{max-width:var(--maxw); margin:0 auto; padding:60px 20px; text-align:center;}
 .detail-table{width:100%; background:#fff; border-radius:var(--radius-md); overflow:hidden; box-shadow:var(--shadow-card); text-align:center; padding:20px; margin: 0 auto;}
-.detail-subtitle{font-size:48px; color:var(--teal-800); margin-bottom:20px;}
+.detail-subtitle{font-size:clamp(1.5rem, 0.972rem + 2.25vw, 3rem); color:var(--teal-800); margin-bottom:20px;}
 .detail-school{display:flex; justify-content:center; gap:30px; }
 .detail-school button {background:none; border:none; border-bottom:5px solid #0ABAB5; cursor:pointer; padding:12px 0 0 ; font-size:24px; font-weight:450}
 .detail-school button.active {
@@ -1039,6 +1029,11 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
     gap: 16px 15px;
     padding: 0 0 10px;
   }
+  .lesson-detail{padding:10px 0;
+    gap:10px;
+  }
+  .lesson-time{font-size:14px;}
+  .lesson-name{font-size:12px;}
 
   .detail-school button {
     font-size: 14px;
@@ -1071,8 +1066,8 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   }
 
   .toggle-option, .toggle-option.active {
-    font-size: 13px;
-    padding: 4px 12px;
+    font-size: 12px;
+    padding: 10px 24px;
   }
   /* -----------------------------------
    * 【1点前の状態】カレンダー ＆ マップ（縦積み設定）
