@@ -12,6 +12,41 @@ mobileNav.querySelectorAll('a').forEach(a => {
   });
 });
 
+const slider = document.querySelector('.voice-scroll');
+  
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  // マウスをクリックした時
+  slider.addEventListener('mousedown', (e) => {
+    isDown = true;
+    slider.classList.add('active'); // ドラッグ中のクラスを追加
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+  });
+
+  // マウスが要素の外に出た時
+  slider.addEventListener('mouseleave', () => {
+    isDown = false;
+    slider.classList.remove('active');
+  });
+
+  // マウスクリックを離した時
+  slider.addEventListener('mouseup', () => {
+    isDown = false;
+    slider.classList.remove('active');
+  });
+
+  // マウスを動かしている時（ドラッグ中）
+  slider.addEventListener('mousemove', (e) => {
+    if (!isDown) return; // クリックしていなければ処理しない
+    e.preventDefault(); // テキスト選択などを防ぐ
+    const x = e.pageX - slider.offsetLeft;
+    const walk = (x - startX) * 2; // スクロール速度（2倍にしています）
+    slider.scrollLeft = scrollLeft - walk;
+  });
+
 // ===== FAQ accordion =====
 document.querySelectorAll('.faq-item').forEach(item => {
   const q = item.querySelector('.faq-q');

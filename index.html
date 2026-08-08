@@ -33,6 +33,7 @@
       <a href="#about-been">BeEnとは</a>
       <a href="#tokucho">BeEnの特徴</a>
       <a href="#voice">voice</a>
+      <a href="#works">過去の作品</a>
       <a href="#detail">detail</a>
     </nav>
 
@@ -54,6 +55,7 @@
     <a href="#about-been">BeEnとは</a>
     <a href="#tokucho">BeEnの特徴</a>
     <a href="#voice">voice</a>
+    <a href="#works">過去の作品</a>
     <a href="#detail">detail</a>
     <a href="#form" class="btn btn-cta">無料体験/講座に申し込む</a>
   </nav>
@@ -76,7 +78,6 @@
 <section class="hero" id="about">
   <!-- 「君のアイデアは、形になる。」から始まる、コース紹介ブロック -->
   <div class="hero-lead" >
-    <!-- id="foryou" ＝ ヘッダーの「for you」リンクの行き先 -->
 
     <h2>君のアイデアは、形になる。</h2>
     <p>知識ゼロから「作る楽しさ」を体感するプログラミング講座</p>
@@ -110,7 +111,7 @@
 
     <div class="badge-row"><span class="pill-badge">基礎講座</span></div>
 
-    <div class="course-cards" >
+    <div class="course-cards course-cards--single" >
       <article class="course-card" >
         <div class="course-thumb course-thumb--python">
           <img src="image5.png" alt="Pythonマスター講座">
@@ -130,17 +131,17 @@
     <!-- 左エリア -->
     <div class="thought-col">
       <div class="thought-card bubble-left">
-        プログラミング学びたいけど何から<br>始めたらいいのかわからない…
+        プログラミング学びたいけど何から始めたらいいのかわからない…
       </div>
       <div class="thought-card bubble-left">
-        プログラミングについて相談できる<br>相手がいない…
+        プログラミングについて相談できる相手がいない…
       </div>
     </div>
 
     <!-- 右エリア -->
     <div class="thought-col">
       <div class="thought-card bubble-right">
-        どのプログラミング言語を学んだら<br>いいのかわからない…
+        どのプログラミング言語を学んだらいいのかわからない…
       </div>
       <div class="thought-card bubble-right">
         そもそもプログラミングってなに？
@@ -255,7 +256,7 @@ Webアプリから機械学習まで広く実装できる上、文法が比較�
   <div class="learn-item">
     <div class="learn-number" aria-hidden="true">01</div>
     <div class="learn-text">
-      <h3>実践的なITスキル</h3>
+      <h1>実践的なITスキル</h1>
       <p>BeEnではコードを書く技術やエンジニアリングに必須のツールを使う技術、ユーザーのことを考えた設計技術などの実践的なスキルを獲得することができます。実践的なITスキルから将来日本をリードするエンジニアを輩出することを目標にしています。</p>
     </div>
     <div class="learn-photo learn-photo--01" aria-hidden="true"></div>
@@ -264,7 +265,7 @@ Webアプリから機械学習まで広く実装できる上、文法が比較�
   <div class="learn-item">
     <div class="learn-number" aria-hidden="true">02</div>
     <div class="learn-text">
-      <h3>論理的思考力</h3>
+      <h1>論理的思考力</h1>
       <p>自らコードを書く中で目的を達成するための手順を筋道立てて考える演習を日常的に行います。順序正しくコードを構築し、エラーの原因を突き止めて解決することを通して論理的に考える習慣を身につけます。このような能力は文系や理系問わない普遍的な課題解決能力です。</p>
     </div>
     <div class="learn-photo learn-photo--02" aria-hidden="true"></div>
@@ -273,7 +274,7 @@ Webアプリから機械学習まで広く実装できる上、文法が比較�
   <div class="learn-item">
     <div class="learn-number" aria-hidden="true">03</div>
     <div class="learn-text">
-      <h3>自己表現力</h3>
+      <h1>自己表現力</h1>
       <p>プログラミングができる中高生がアプリ開発に取り組むことで自分のアイデアを現実化することができます。この過程を通して自分が思い描くものを表現することができるので自己表現力の向上につながり、このような力の分野に関わらず汎用的な成果につながります。</p>
     </div>
     <div class="learn-photo learn-photo--03" aria-hidden="true"></div>
@@ -289,29 +290,69 @@ Webアプリから機械学習まで広く実装できる上、文法が比較�
   <!-- 4人分の感想カードを並べる箱 -->
   <div class="voice-scroll">
     <article class="voice-card">
-      <div class="voice-avatar" aria-hidden="true">🧑</div>
-      <p class="voice-name">中学3年生　男子<br><span>生徒</span></p>
-      <p class="voice-text">プログラミングの美しさや楽しさを身をもって体験できたことによって、いろいろな物事を真正面からきちんと考えて向き合えるようになりました。また、保護型の授業なので、通学より理解がしやすいです。</p>
+      <div class="voice-avatar">
+        <img src="voice_1.jpg" alt="生徒の写真">
+      </div>
+      <p class="voice-name">中学3年生 男子</p>
+      <p class="voice-role">生徒</p>
+      <div class="voice-divider"></div>
+      <p class="voice-text">プログラミングの奥深さと楽しさを身をもって体験できたことによって、いろいろな物事を真正面からきちんと考えて向き合えるようになりました。<br>また、体験型の授業なので、座学より理解がしやすいです。</p>
     </article>
+
     <article class="voice-card">
-      <div class="voice-avatar" aria-hidden="true">👧</div>
-      <p class="voice-name">高校1年生　女子<br><span>生徒</span></p>
-      <p class="voice-text">プログラミングの基本的な知識が身につき、自らWebサイトを作れるようになりました。毎回の授業で新しくできることが増えてきており、日に見えて成果がわかることが楽しいです。</p>
+      <div class="voice-avatar">
+        <img src="voice_2.jpg" alt="生徒の写真">
+      </div>
+      <p class="voice-name">高校1年生 女子</p>
+      <p class="voice-role">生徒</p>
+      <div class="voice-divider"></div>
+      <p class="voice-text">プログラミングの基本的な知識が身につき、自らWebサイトを作れるようになりました。<br>毎回の授業で新たにできることが増えてきたり、目に見えて成果がわかることが楽しいです。</p>
     </article>
+
     <article class="voice-card">
-      <div class="voice-avatar" aria-hidden="true">👩</div>
-      <p class="voice-name">高校2年生　男子<br><span>保護者</span></p>
-      <p class="voice-text">本人は体験してやってみたいと思っていましたが、やり切れるのかが心配でしたが、実際通い始めると程よく気楽で楽しかったと笑顔で帰ってくるので安心しました。</p>
+      <div class="voice-avatar">
+        <img src="voice_3.jpg" alt="保護者の写真">
+      </div>
+      <p class="voice-name">高校2年生 男子</p>
+      <p class="voice-role">保護者</p>
+      <div class="voice-divider"></div>
+      <p class="voice-text">本人は体験してやってみたいと思っていましたが、やり切れるのか向いてるのか少し心配でした。実際通い始めると毎週楽しかったと笑顔で帰ってくるので安心しました。</p>
     </article>
+
     <article class="voice-card">
-      <div class="voice-avatar" aria-hidden="true">🧑‍🎓</div>
-      <p class="voice-name">中学2年生　女子<br><span>生徒</span></p>
-      <p class="voice-text">Webページ作りの授業がとても楽しく、コードで思い通りの見た目を作れた瞬間はとても嬉しかったです。自分で考えながら手を動かすようなWebページ作りが得意になりました。授業を通してタイピングも早くなりました。</p>
+      <div class="voice-avatar">
+        <img src="voice_4.jpg" alt="生徒の写真">
+      </div>
+      <p class="voice-name">中学2年生 女子</p>
+      <p class="voice-role">生徒</p>
+      <div class="voice-divider"></div>
+      <p class="voice-text">Webページ作りの授業がとても楽しく、コードで思い通りの見た目を作れた瞬間はとても嬉しかったです。<br>自分で考えながら手を動かすようなWebページ作りが得意になりました。授業を通してタイピングも早くなりました。</p>
+    </article>
+
+    <article class="voice-card">
+      <div class="voice-avatar">
+        <img src="voice_5.jpg" alt="生徒の写真">
+      </div>
+      <p class="voice-name">高校1年生 女子</p>
+      <p class="voice-role">保護者</p>
+      <div class="voice-divider"></div>
+      <p class="voice-text">情報教育が取り入れられたが、学校では実践的な内容は教えてもらえないので、将来、役に立つかどうかわからない中、BeEngineerでは実践形式で教えてくださいます。</p>
+    </article>
+
+    <article class="voice-card">
+      <div class="voice-avatar">
+        <img src="voice_6.jpg" alt="生徒の写真">
+      </div>
+      <p class="voice-name">中学2年生 男子</p>
+      <p class="voice-role">保護者</p>
+      <div class="voice-divider"></div>
+      <p class="voice-text">最初は苦手意識が強く、続くかどうか不安でしたが、毎回楽しいようで前向きな気持ちが出てきました。先生は細やかに指導してくださるので、失敗しても安心して取り組めるようです。
+先生だけでなく、違う学校の他学年の方から、たくさん刺激をもらってるようです。</p>
     </article>
   </div>
 </section>
 
-<section class="works-section">
+<section class="works-section" id="works">
   <h2 class="section-title works-title">過去の受講者の作品</h2>
   <div class="works-panel">
     <div class="works-grid">
@@ -381,7 +422,7 @@ Webアプリから機械学習まで広く実装できる上、文法が比較�
         </div>
         <div class="school-map">
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3267.133323975503!2d135.7787923!3d35.028394399999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x600109202dca3be5%3A0x47f35e4463f2494d!2sBeEngineer!5e0!3m2!1sja!2sjp!4v1785578956786!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-          <p><br>住所:〒606-8301<br>京都府京都市左京区吉田泉殿町1-34<br>ダイショウ百万遍ビル1・2F</p>
+          <p><br>BeEngineer京大本校<br>住所:〒606-8301<br>京都府京都市左京区吉田泉殿町1-34<br>ダイショウ百万遍ビル1・2F</p>
           <br>
           <p>アクセス:出町柳駅から徒歩10分（駐輪場あり）</p>
         </div>
@@ -392,17 +433,17 @@ Webアプリから機械学習まで広く実装できる上、文法が比較�
       <div class="price-card1">
         <h2>バイブコーディング</h2>
         <p>60分</p>
-        <h1>0円</h1>
+        <h3>0円</h3>
       </div>
       <div class="price-card1">
         <h2>Webページ開発体験</h2>
         <p>60分</p>
-        <h1>0円</h1>
+        <h3>0円</h3>
       </div>
       <div class="price-card2">
         <h2>Pythonマスター講座</h2>
         <p>120分×2コマ×二日間</p>
-        <h1>20,000円</h1>
+        <h3>20,000円</h3>
       </div>
     </div>
   </div>
@@ -505,11 +546,23 @@ Webアプリから機械学習まで広く実装できる上、文法が比較�
 
     <label class="form-row">
       <span class="form-label">開催場所 <em class="req">必須</em></span>
-      <input type="text" name="place" required>
+      <select name="place" required>
+        <option value="" disabled selected>選択してください</option>
+        <option value="京大本校（京都）">京大本校（京都）</option>
+        <option value="梅田校（大阪）">梅田校（大阪）</option>
+        <option value="飯田橋校（東京）">飯田橋校（東京）</option>
+        <option value="横浜校（神奈川）">横浜校（神奈川）</option>
+        <option value="首里校（沖縄）">首里校（沖縄）</option>
+      </select>
     </label>
     <label class="form-row">
       <span class="form-label">参加するイベント <em class="req">必須</em></span>
-      <input type="text" name="event" required>
+      <select name="event" required>
+        <option value="" disabled selected>選択してください</option>
+        <option value="バイブコーディング（無料体験）">バイブコーディング（無料体験）</option>
+        <option value="Webページ開発体験（無料体験）">Webページ開発体験（無料体験）</option>
+        <option value="Pythonマスター講座（基礎講座）">Pythonマスター講座（基礎講座）</option>
+      </select>
     </label>
     <label class="form-row">
       <span class="form-label">メール <em class="req">必須</em></span>
@@ -542,8 +595,7 @@ Webアプリから機械学習まで広く実装できる上、文法が比較�
      ============================================================ -->
 <footer class="site-footer">
   <a href="#top" class="footer-logo">
-    <span class="logo-sub">Be</span>
-    <span class="logo-main">Engineer</span>
+    <img src="image2.png" alt="BeEngineerのロゴ" width="200" height="100">
   </a>
   <nav class="footer-nav">
     <span class="footer-nav-label">運営会社</span>
