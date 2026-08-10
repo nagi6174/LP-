@@ -12,22 +12,15 @@
 </head>
 <body>
 <!-- ============================================================
-     ヘッダー（ページ上部に固定表示されるロゴ＋メニュー部分）
+     ヘッダー
      ============================================================ -->
-<header class="site-header" id="top">
-  <!-- id="top" は「ページの一番上」の目印。フッターのロゴから
-       ここへジャンプできるようにするために付けている -->
+<header class="site-header" >
 
   <div class="header-inner">
-    <!-- ロゴ部分（クリックするとページ上部に戻る） -->
     <a href="#top" class="logo">
-      <img src="image2.png" alt="BeEn" width="150" height="65">
+      <img src="image2.png" alt="BeEn" >
     </a>
-
-    <!-- パソコン画面用のメニュー（スマホでは非表示にしてハンバーガーメニューに切り替える） -->
     <nav class="main-nav">
-      <!-- href="#about" のように「#」から始まるリンクは、
-           このページの中にある id="about" の場所へジャンプする、という意味 -->
       <a href="#about">about</a>
       <a href="#foryou">for you</a>
       <a href="#about-been">BeEnとは</a>
@@ -36,19 +29,12 @@
       <a href="#works">過去の作品</a>
       <a href="#detail">detail</a>
     </nav>
-
-    <!-- 右上の赤いボタン。#formへジャンプして申し込みフォームを開く -->
     <a href="#form" class="btn btn-cta header-cta">無料体験/講座に申し込む</a>
-
-    <!-- スマホ画面でだけ表示される「三本線」のメニューボタン -->
-    <!-- クリックしたときの動きは script.js に書いてある -->
     <button class="hamburger" id="hamburger" aria-label="メニュー">
       <span></span><span></span><span></span>
-      <!-- この3つのspanが、CSSで「三本線」の見た目になっている -->
     </button>
   </div>
 
-  <!-- スマホ画面でハンバーガーボタンを押すと開く、縦並びのメニュー -->
   <nav class="mobile-nav" id="mobileNav">
     <a href="#about">about</a>
     <a href="#foryou">for you</a>
@@ -61,34 +47,46 @@
   </nav>
 </header>
 
-<!-- mainタグ：ヘッダーとフッターを除く「ページ本体」を囲む -->
+
 <main>
 
 <!-- ============================================================
-     ファーストビュー（最初に見える大きな写真＋見出し部分）
+     ファーストビュー
      ============================================================ -->
+<section class="firstview" id="top">
+  <div class="fv-wrapper">
 
-  <div class="hero-single">
-    <!-- role="img" と aria-label は「これは写真です、内容はこれです」と
-         スクリーンリーダー（読み上げソフト）に伝えるためのもの -->
-
-    <img src="image1.png" alt="パソコンに向かって学習する生徒たちの写真" class="hero-photo-img">
+  <div class="fv-photo photo-left">
+    <img src="fv-l.png" alt="左">
   </div>
-  <div class="diagonal-divider" aria-hidden="true"></div>
+
+  <div class="fv-photo photo-center">
+    <img src="Rectangle 12.png" alt="中央">
+  </div>
+
+  <div class="fv-photo photo-right">
+    <img src="fv-r.png" alt="右">
+  </div>
+  <div class="fv-text">
+    <h1>プログラミングで、<br>君の想像力に<span class="pink">革命</span>を</h1>
+  </div>
+</div>
+
+
+</section>
 <section class="hero" id="about">
+  
+  <div class="diagonal-divider" aria-hidden="true"></div>
   <!-- 「君のアイデアは、形になる。」から始まる、コース紹介ブロック -->
   <div class="hero-lead" >
 
     <h2>君のアイデアは、形になる。</h2>
     <p>知識ゼロから「作る楽しさ」を体感するプログラミング講座</p>
 
-    <!-- 「無料体験」というピンク色の丸いバッジ -->
     <div class="badge-row"><span class="pill-badge">無料体験</span></div>
 
-    <!-- 2つの体験講座カードを横並びにするための箱 -->
     <div class="course-cards">
 
-      <!-- 1つ目のカード：バイブコーディング -->
       <article class="course-card">
          <div class="course-thumb course-thumb--vibe">
            <img src="image3.jpg" alt="新感覚！証明ゲーム！〜図形を証明せよ〜のゲーム画面のスクリーンショット">
@@ -98,7 +96,6 @@
          <p>所要時間：60分</p>
        </article>
 
-      <!-- 2つ目のカード：Webページ開発体験 -->
       <article class="course-card">
         <div class="course-thumb course-thumb--web">
           <img src="image4.png" alt="コードが表示されたノートパソコンの写真">
@@ -128,7 +125,6 @@
   <h2 class="section-title">こんな君に</h2>
 
   <div class="thought-container">
-    <!-- 左エリア -->
     <div class="thought-col">
       <div class="thought-card bubble-left">
         プログラミング学びたいけど何から始めたらいいのかわからない…
@@ -138,7 +134,6 @@
       </div>
     </div>
 
-    <!-- 右エリア -->
     <div class="thought-col">
       <div class="thought-card bubble-right">
         どのプログラミング言語を学んだらいいのかわからない…
@@ -149,10 +144,8 @@
     </div>
   </div> 
 
-  <!-- バブルの下のエリア（thought-containerの外に出す） -->
   <div class="solution-section">
     <div class="solution-middle">
-      <!-- 中央の二重矢印 -->
       <div class="arrow-double">
         <svg width="300" height="60" viewBox="0 0 300 70" fill="none">
           <path d="M10 10 L150 32 L290 10" stroke="#17635c" stroke-width="12" stroke-linecap="square" stroke-linejoin="miter"/>
@@ -160,11 +153,9 @@
         </svg>
       </div>
 
-      <!-- 右側のイラスト -->
       <img src="person.png" alt="悩む人" class="person-img">
     </div>
 
-    <!-- 下部のテキスト -->
     <p class="solution-text">
       BeEngineerでは様々な悩みを解決してくれます！
     </p>
@@ -174,13 +165,11 @@
 
 
 <!-- ============================================================
-     CTA（行動喚起）バナー その1
-     「CTA」＝ Call To Action。ユーザーに行動（申し込みなど）を
-     促すための、目立つ帯とボタンのこと
+     CTAバナー 1
      ============================================================ -->
 <section class="cta-banner">
   <div class="cta-card">
-    <h2>この夏、君自身に革命を起こそう</h2>
+    <h2>この夏、君自身に<span class="pink">革命</span>を起こそう</h2>
     <p>
       君に必要なのは、<span class="highlight">「やってみたい」という小さな好奇心</span>だけ。<br>
       難しい知識や特別なスキルは、最初から一切いりません。<br>
@@ -211,6 +200,7 @@
       <span class="acc-bar"><span class="acc-bar-fill"></span></span>
       <h3 class="acc-title"> 京大生中心のエンジニアによる<br>実践的な講座</h3>
       <div class="acc-content">
+        <img src="about1.jpg" alt="講師の写真" class="acc-photo">
         <p>講師は全員、500時間以上のプログラミング研修をクリアし、講師としての指導スキルを獲得した京大生を中心とするエンジニアです。 京大発のITベンチャーで培われた実践的で最新のプログラミング知識を詰め込んだ独自カリキュラムを用いているので、社会で通用するプログラミングスキルを身に着けることができます。</p>
       </div>
     </div>
@@ -220,6 +210,7 @@
       <span class="acc-bar"><span class="acc-bar-fill"></span></span>
       <h3 class="acc-title">注目言語のPythonを使用</h3>
       <div class="acc-content">
+        <img src="about2.jpg" alt="Pythonのロゴ" class="acc-photo">
         <p>「Python」は、多くの企業で採用されており、「YouTube」「Instagram」といった有名なアプリの開発に使われている言語です。
 Webアプリから機械学習まで広く実装できる上、文法が比較的シンプルなので初心者でも学習しやすいです。
 さらに、高校で必須となった「情報Ⅰ」でもメインのプログラミング言語として扱われている、今もっとも注目の言語です。</p>
@@ -231,6 +222,7 @@ Webアプリから機械学習まで広く実装できる上、文法が比較�
       <span class="acc-bar"><span class="acc-bar-fill"></span></span>
       <h3 class="acc-title">日々アップデートされる教科書</h3>
       <div class="acc-content">
+        <img src="about3.jpg" alt="教科書の画像" class="acc-photo">
         <p>Webでの教科書を採用することで最新の技術を日々更新しています。
 運営会社DeMiAが実際に150名以上のインターン生を本物のエンジニアにしてきたノウハウを中高生向けに教材化しています。
 また、中高生教育に実績のあるワオ・コーポレーションが教材のチェックを担当しているため、中高生にもわかりやすい表現になっています。
@@ -395,12 +387,13 @@ Webアプリから機械学習まで広く実装できる上、文法が比較�
     <div class="date-and-school">
       <h3 class="detail-subtitle">日程・校舎</h3>
       <div class="detail-school">
-        <button class="active">京大本校<br>（京都）</button>
-        <button>梅田校<br>（大阪）</button>
-        <button>飯田橋校<br>（東京）</button>
-        <button>横浜校<br>（神奈川）</button>
-        <button>首里校<br>（沖縄）</button>
+        <button class="active" onclick="switchSchool('kyoto', this)">京大本校<br>（京都）</button>
+        <button onclick="switchSchool('umeda', this)">梅田校<br>（大阪）</button>
+        <button onclick="switchSchool('iidabashi', this)">飯田橋校<br>（東京）</button>
+        <button onclick="switchSchool('yokohama', this)">横浜校<br>（神奈川）</button>
+        <button onclick="switchSchool('shuri', this)">首里校<br>（沖縄）</button>
       </div>
+    <div id="school-kyoto" class="school-content active">
       <div class="school-detail">
         <div class="lesson-calendar">
           <div class="toggle-switch">
@@ -422,11 +415,129 @@ Webアプリから機械学習まで広く実装できる上、文法が比較�
         </div>
         <div class="school-map">
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3267.133323975503!2d135.7787923!3d35.028394399999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x600109202dca3be5%3A0x47f35e4463f2494d!2sBeEngineer!5e0!3m2!1sja!2sjp!4v1785578956786!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
-          <p><br>BeEngineer京大本校<br>住所:〒606-8301<br>京都府京都市左京区吉田泉殿町1-34<br>ダイショウ百万遍ビル1・2F</p>
+          <p><br>住所:〒606-8301<br>京都府京都市左京区吉田泉殿町1-34<br>ダイショウ百万遍ビル1・2F</p>
           <br>
           <p>アクセス:出町柳駅から徒歩10分（駐輪場あり）</p>
         </div>
       </div>
+    </div>
+
+    <div id="school-umeda" class="school-content">
+      <div class="school-detail">
+        <div class="lesson-calendar">
+          <div class="toggle-switch">
+            <button class="toggle-option active">無料体験</button>
+            <button class="toggle-option">基礎講座</button>
+          </div>
+          <div class="lesson-detail">
+            <div class="lesson-time">7/5[<span class="sun">日</span>]<br>11:00-12:00</div>
+            <div class="lesson-name">バイブコーディング</div>
+          </div>
+          <div class="lesson-detail">
+            <div class="lesson-time">7/12[<span class="sun">日</span>]<br>17:30-18:30</div>
+            <div class="lesson-name">バイブコーディング</div>
+          </div>
+          <div class="lesson-detail">
+            <div class="lesson-time">8/2[<span class="sun">日</span>]<br>12:00-13:00</div>
+            <div class="lesson-name">バイブコーディング</div>
+          </div>
+        </div>
+        <div class="school-map">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13119.804447536368!2d135.49713300000002!3d34.706413!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000e7bade6f89df%3A0x8766069fb44a5918!2zQmVFbmdpbmVlciDmooXnlLDmoKEg5Lit6auY55Sf44Gu44Gf44KB44Gu44OX44Ot44Kw44Op44Of44Oz44Kw5pWZ5a6k!5e0!3m2!1sja!2sjp!4v1786258717615!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          <p><br>住所:〒530-0012<br>大阪府大阪市北区芝田1-4-14<br>芝田町ビル5F</p>
+          <br>
+          <p>アクセス:阪急梅田駅（茶屋町口）より北へ徒歩1分<br>JR大阪駅・地下鉄梅田駅（北口）5番出口より北へ徒歩3分</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="school-iidabashi" class="school-content">
+      <div class="school-detail">
+        <div class="lesson-calendar">
+          <div class="toggle-switch">
+            <button class="toggle-option active">無料体験</button>
+            <button class="toggle-option">基礎講座</button>
+          </div>
+          <div class="lesson-detail">
+            <div class="lesson-time">7/5[<span class="sun">日</span>]<br>11:00-12:00</div>
+            <div class="lesson-name">Webページ開発体験</div>
+          </div>
+          <div class="lesson-detail">
+            <div class="lesson-time">7/12[<span class="sun">日</span>]<br>17:30-18:30</div>
+            <div class="lesson-name">Webページ開発体験</div>
+          </div>
+          <div class="lesson-detail">
+            <div class="lesson-time">8/2[<span class="sun">日</span>]<br>12:00-13:00</div>
+            <div class="lesson-name">Webページ開発体験</div>
+          </div>
+        </div>
+        <div class="school-map">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12960.466755847388!2d139.74434!3d35.698746!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188d0049fe7617%3A0xabc5a8acb84acc89!2zQmVFbmdpbmVlciDmnbHkuqzpo6_nlLDmqYvmoKEg5Lit6auY55Sf44Gu44Gf44KB44Gu44OX44Ot44Kw44Op44Of44Oz44Kw5pWZ5a6k!5e0!3m2!1sja!2sjp!4v1786258967535!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          <p><br>住所:〒102-0071<br>東京都千代田区富士見2-12-13<br>フィル・パーク Kagulab.IIDABASHI</p>
+          <br>
+          <p>アクセス:飯田橋駅（メトロ・JR）から徒歩5分</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="school-yokohama" class="school-content">
+      <div class="school-detail">
+        <div class="lesson-calendar">
+          <div class="toggle-switch">
+            <button class="toggle-option active">無料体験</button>
+            <button class="toggle-option">基礎講座</button>
+          </div>
+          <div class="lesson-detail">
+            <div class="lesson-time">7/5[<span class="sun">日</span>]<br>11:00-12:00</div>
+            <div class="lesson-name">Webページ開発体験</div>
+          </div>
+          <div class="lesson-detail">
+            <div class="lesson-time">7/12[<span class="sun">日</span>]<br>17:30-18:30</div>
+            <div class="lesson-name">Webページ開発体験</div>
+          </div>
+          <div class="lesson-detail">
+            <div class="lesson-time">8/2[<span class="sun">日</span>]<br>12:00-13:00</div>
+            <div class="lesson-name">Webページ開発体験</div>
+          </div>
+        </div>
+        <div class="school-map">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12999.999423276506!2d139.630869!3d35.454798!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60185d0050093495%3A0x8a32f66ecd6ef33c!2zQmVFbmdpbmVlciDmqKrmtZzmoKEg5Lit6auY55Sf44Gu44Gf44KB44Gu44OX44Ot44Kw44Op44Of44Oz44Kw5pWZ5a6k!5e0!3m2!1sja!2sjp!4v1786258997589!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          <p><br>住所:〒220-0012<br>神奈川県横浜市西区みなとみらい2-2-1<br>横浜ランドマークタワー14F</p>
+          <br>
+          <p>アクセス:みなとみらい駅から徒歩2分<br>桜木町駅から徒歩5分</p>
+        </div>
+      </div>
+    </div>
+
+        <div id="school-shuri" class="school-content">
+      <div class="school-detail">
+        <div class="lesson-calendar">
+          <div class="toggle-switch">
+            <button class="toggle-option active">無料体験</button>
+            <button class="toggle-option">基礎講座</button>
+          </div>
+          <div class="lesson-detail">
+            <div class="lesson-time">7/5[<span class="sun">日</span>]<br>11:00-12:00</div>
+            <div class="lesson-name">バイブコーディング</div>
+          </div>
+          <div class="lesson-detail">
+            <div class="lesson-time">7/12[<span class="sun">日</span>]<br>17:30-18:30</div>
+            <div class="lesson-name">バイブコーディング</div>
+          </div>
+          <div class="lesson-detail">
+            <div class="lesson-time">8/2[<span class="sun">日</span>]<br>12:00-13:00</div>
+            <div class="lesson-name">バイブコーディング</div>
+          </div>
+        </div>
+        <div class="school-map">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14317.31987273525!2d127.7236!3d26.218466!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34e56bff591e2409%3A0x38f9f76599ff3cbc!2z5YCL5Yil5oyH5bCOQXhpcyDpppbph4zmoKE!5e0!3m2!1sja!2sjp!4v1786258905273!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          <p><br>住所:〒903-0806<br>沖縄県那覇市首里汀良町1-27</p>
+          <br>
+          <p>アクセス:ゆいレール首里駅から徒歩3分</p>
+        </div>
+      </div>
+    </div>
+
     </div>
     <h3 class="detail-subtitle">料金</h3>
     <div class="detail-price">
@@ -497,7 +608,7 @@ Webアプリから機械学習まで広く実装できる上、文法が比較�
     <h2>さあ、この夏で人生を変えよう。</h2>
     <p>
       <!-- span class="highlight" で囲んだ部分だけ、CSSで赤色の太字にしている -->
-      BeEnjineerで手に入るのは、一生モノの「<span class="highlight">創り出すスキル</span>」と、将来の強力な武器になる「<span class="highlight">自分だけのオリジナル作品</span>」です。<br>
+      BeEngineerで手に入るのは、一生モノの「<span class="highlight">創り出すスキル</span>」と、将来の強力な武器になる「<span class="highlight">自分だけのオリジナル作品</span>」です。<br>
       ただスマホで誰かが作ったゲームを遊ぶだけの夏休みは、もう終わり。<br>
       講座を受けた後、世界を驚かせる側にまわっているのは君だ。
     </p>
@@ -536,7 +647,15 @@ Webアプリから機械学習まで広く実装できる上、文法が比較�
     <div class="form-row form-row--split">
       <label>
         <span class="form-label">学年 <em class="req">必須</em></span>
-        <input type="text" name="grade" required>
+        <select name="event" required>
+          <option value="" disabled selected>選択してください</option>
+          <option value="中1">中学1年生</option>
+          <option value="中2">中学2年生</option>
+          <option value="中3">中学3年生</option>
+          <option value="高1">高校1年生</option>
+          <option value="高2">高校2年生</option>
+          <option value="高3">高校3年生</option>
+        </select>
       </label>
       <label>
         <span class="form-label">学校名 <em class="req">必須</em></span>

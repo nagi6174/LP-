@@ -69,19 +69,33 @@ document.querySelectorAll('.faq-item').forEach(item => {
   });
 });
 
-// ===== campus tabs (visual state only — same schedule shown for all in this demo) =====
-document.querySelectorAll('.campus-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.campus-tab').forEach(t => t.classList.remove('is-active'));
-    tab.classList.add('is-active');
+// ===== 校舎の切り替え機能 =====
+function switchSchool(schoolId, btnElement) {
+  // 1. 全ての校舎コンテンツから 'active' を外して隠す
+  document.querySelectorAll('.school-content').forEach(content => {
+    content.classList.remove('active');
   });
-});
+
+  // 2. 選ばれた校舎のコンテンツを探して 'active' を付け、表示する
+  const targetContent = document.getElementById('school-' + schoolId);
+  if (targetContent) {
+    targetContent.classList.add('active');
+  }
+
+  // 3. 全てのタブボタンから 'active' を外して色を元に戻す
+  document.querySelectorAll('.detail-school button').forEach(btn => {
+    btn.classList.remove('active');
+  });
+
+  // 4. クリックされたタブボタンに 'active' を付けて緑色にする
+  btnElement.classList.add('active');
+}
 
 // ===== schedule type toggle (無料体験 / 講座) =====
-document.querySelectorAll('.toggle-btn').forEach(btn => {
+document.querySelectorAll('.toggle-option').forEach(btn => {
   btn.addEventListener('click', () => {
-    document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('is-active'));
-    btn.classList.add('is-active');
+    document.querySelectorAll('.toggle-option').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
   });
 });
 
@@ -164,3 +178,13 @@ if (initialItem) {
   const initialContent = initialItem.querySelector('.acc-content');
   initialContent.style.maxHeight = initialContent.scrollHeight + 'px';
 }
+
+document.querySelectorAll('.acc-photo').forEach(img => {
+  img.addEventListener('load', () => {
+    const item = img.closest('.acc-item');
+    if (item && item.classList.contains('is-active')) {
+      const content = item.querySelector('.acc-content');
+      content.style.maxHeight = content.scrollHeight + 'px';
+    }
+  });
+});

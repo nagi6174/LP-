@@ -44,7 +44,10 @@
 }
 html{
   scroll-behavior:smooth;   /* リンクをクリックしたときページ内をカクッとではなく、なめらかにスクロールする */
-  scroll-padding-top:90px;  /* 固定ヘッダーに見出しが隠れないよう、スクロール時に上の余白を確保する */
+  scroll-padding-top:77px;  /* 固定ヘッダーに見出しが隠れないよう、スクロール時に上の余白を確保する */
+}
+@media(max-width:768px){
+  html{scroll-padding-top:62px;} 
 }
 body{
   margin:0;                 /* ブラウザ標準で付いている外側の余白を消す */
@@ -76,7 +79,7 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   font-size:clamp(1.75rem, 1.266rem + 2.07vw, 3.125rem);
   /* clamp(最小,標準,最大) ＝ 画面の幅に応じて自動でサイズを調整しつつ、
      小さくなりすぎたり大きくなりすぎたりしないようにする便利な書き方 */
-  font-weight:600;
+  font-weight:800;
   color:var(--teal-700);
   letter-spacing:.04em; /* 文字と文字の間隔を少し広げる */
   margin-bottom:36px;
@@ -142,6 +145,7 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   backdrop-filter:blur(8px); /* 背景がうっすら透けて見える「すりガラス」効果 */
   border-bottom:1px solid var(--teal-100);
 }
+
 .header-inner{
   max-width:var(--maxw);
   margin:0 auto; /* 左右のmarginをautoにすると、要素が中央寄せになる */
@@ -150,11 +154,12 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   gap:22px; /* 並んでいる要素どうしの間隔 */
   padding:6px 24px;
 }
-.logo{display:flex; flex-direction:column; line-height:1; margin-right:auto; font-family:var(--font-display);}
+.logo{display:flex; flex-direction:column; line-height:1; margin-right:auto; font-family:var(--font-display); width:150px; height:65px;}
 /* margin-right:auto ＝ 右側の余白を自動で最大にする ＝ 結果として
    「これより右にあるものを右端に寄せる」効果が生まれる（メニューを右寄せにするテクニック） */
-.logo-sub{font-size:13px; font-weight:700; color:var(--teal-700);}
-.logo-main{font-size:20px; font-weight:800; color:var(--teal-900); letter-spacing:.01em;}
+@media (max-width:768px){
+  .logo{width:120px; height:50px;}
+}
 .main-nav{display:flex; gap:22px; font-size:14px; font-weight:500; color:var(--ink); align-items:center;line-height:1.5;}
 .main-nav a{position:relative; padding:4px 0;}
 .main-nav a:hover{color:var(--teal-700);}
@@ -204,52 +209,134 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
 /* ============================================================
    ヒーロー（ファーストビュー：写真＋見出し部分）
    ============================================================ */
-.hero{
-  background:linear-gradient(180deg,#f4fbfa 0%, var(--bg-pale) 55%, var(--teal-100) 100%);
-  /* linear-gradient(角度, 色1, 色2, ...) ＝ 色から色へ滑らかに変化するグラデーション背景 */
-  padding-bottom:60px;
+  /* =======================================
+   1. 1920px 〜 995px (PC表示)
+======================================= */
+.fv-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1920px;
+  height:clamp(18.25rem, 6.296rem + 51vw, 67.5rem);
+  margin: 0 auto;
+  overflow: hidden;
 }
 
-.hero-single{
-  position:relative;
-  width:100%;
-  max-width:1440px;      /* 写真の実サイズと同じ1440pxを上限にする */
-  aspect-ratio:1440/810; /* 縦横の比率を1440:810（＝16:9）に固定する。
-                            これを指定しておくと、画面幅に合わせて
-                            幅が縮んでも「高さも自動で連動して縮む」ので、
-                            写真が変形せずきれいに収まる */
-  margin:0 auto;
-  overflow:hidden; /* はみ出た部分を切り取って見せない（角の外側にはみ出さないように） */
-
-}
-.hero-photo-img{
-  /* このimgタグを親要素(.hero-single)にぴったり重ねて敷き詰める */
-  position:absolute;
-  inset:0;         /* 上下左右すべて0＝親要素いっぱいに広げる */
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  /* object-fit:cover ＝ 画像の縦横比を保ったまま、
-     枠からはみ出た部分は切り取りつつ、隙間なく敷き詰めてくれる指定。
-     写真そのものが1440×810ぴったりでなくても、
-     見た目上は綺麗に16:9の枠を埋めてくれる */
-  z-index:0;
+.fv-photo {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background-color: #ffffff;
 }
 
-.hero-title{
-  position:relative;
-  z-index:1; /* 上のhero-code-bgより手前に表示されるようにする */
-  color:#fff;
-  text-align:center;
-  font-size:clamp(24px,4vw,38px);
-  font-weight:800;
-  line-height:1.5;
-  text-shadow:0 2px 14px rgba(0,0,0,.5); /* 白文字を写真の上でも読みやすくするための影 */
-  padding:0 24px;
+.fv-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
-/* aspect-ratio:1440/810 を指定しているので、
-   スマホで幅が縮んでも高さは自動的に比率通り縮む。
-   そのため「スマホ用に高さを指定し直す」処理はもう不要 */
+
+/* 
+  ▼ 重なりと隙間防止の計算式
+  1920pxのときでも左右の写真が中央に届く十分な幅を保ち、
+  画面が縮むにつれて真ん中の写真へ被さっていきます！
+*/
+
+/* 左の写真 */
+.photo-left {
+  left: 0;
+  width: calc(477px + (100vw - 1440px) / 2);
+  min-width: 477px; 
+  max-width: 50%;  
+  z-index: 2; 
+}
+
+/* 中央の写真（真ん中に固定） */
+.photo-center {
+  left: 50%;
+  transform: translateX(-50%);
+  width: 496px;
+  z-index: 1; 
+}
+
+/* 右の写真 */
+.photo-right {
+  right: 0;
+  width: calc(477px + (100vw - 1440px) / 2); 
+  min-width: 477px; 
+  max-width: 50%;  
+  z-index: 2;
+}
+
+
+/* =======================================
+   2. 994px 〜 769px (タブレット表示)
+======================================= */
+@media (max-width: 994px) {
+  .fv-wrapper {
+    display: flex;
+  }
+
+  .fv-photo {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    transform: none;
+    min-width: 0;
+    max-width: none;
+  }
+
+  .photo-center {
+    display: none;
+  }
+
+  /* 重ならずに、元の写真の比率（477:517）を保って横並びで縮める */
+  .photo-left {
+    width: 47.99%; /* 477 / 994 */
+  }
+
+  .photo-right {
+    width: 52.01%; /* 517 / 994 */
+  }
+}
+
+
+/* =======================================
+   3. 768px 以下 (SP表示)
+======================================= */
+@media (max-width: 768px) {
+  .photo-left,
+  .photo-right {
+    width: 50%; /* 幅は半分ずつ */
+  }
+}
+
+.fv-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* 上下左右のピッタリ中央に配置 */
+  z-index: 10; /* 写真（z-index: 1〜2）より手前に表示 */
+  text-align: center;
+  background-color: #ffffff; /* 文字色（背景画像に合わせて調整してください） */
+  pointer-events: none; /* 写真へのクリック・タップを邪魔しない設定 */
+}
+
+.fv-text h1 {
+  color: var(--color2);
+  font-size:clamp(1.625rem, 1.031rem + 2.54vw, 3.313rem); /* 画面幅に合わせて滑らかに伸縮 */
+  font-weight: bold;
+  font-weight:700;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  margin: 0;
+  white-space: nowrap;
+}
+.pink{color:#F43F5E;}
+
+
+
+
 
 /* ============================================================
    斜めにカットされた帯（ヒーロー写真の下のつなぎ目）
@@ -266,14 +353,8 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
      「0 35%」＝左上の角を、上から35%の高さまで下げる
      　→ これにより上辺が左から右へ斜め上がりの線になる */
 }
-@media (max-width:768px){
-  .diagonal-divider{height:100px; margin-top:-24px;}
-}
 
-@media (max-width:768px){
-  :root{ --band-h:110px; }
-  .diagonal-divider{margin-top:-24px;}
-}
+
 
 .hero-lead{max-width:1016px;
   margin-top: calc(var(--band-h) * -0.85); 
@@ -282,25 +363,21 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   text-align:center;
   position:relative;
   z-index:3;}
-.hero-lead h2{font-size:clamp(32px, 12.87px + 2.53vw, 50px); color:var(--bg-color1);}
-.hero-lead > p{margin-top:10px; font-size:clamp(18px, -2.17px + 2.65vw, 36px); color:var(--bg-color1);  }
+.hero-lead h2{font-size:clamp(1.5rem, 0.928rem + 2.44vw, 3.125rem); color:var(--bg-color1);}
+.hero-lead > p{margin-top:10px; font-size:clamp(0.875rem, 0.391rem + 2.07vw, 2.25rem); color:var(--bg-color1);  }
 .badge-row{margin:30px 0 26px;}
 .pill-badge{
   display:inline-block;
   border:4px solid var(--pink-600);
   color:var(--pink-600);
   font-family:var(--font-display);
-  font-weight:700;
+  font-weight:900;
   font-size:clamp(1.063rem, 0.644rem + 1.78vw, 2.25rem);
   padding:6px 40px;
   border-radius:999px;
   background:#fff;
 }
 
-@media (max-width:768px){
-  .hero-lead h2{font-size:24px;}
-  .hero-lead > p{font-size:14px;}
-}
 
 
 .course-cards{
@@ -570,7 +647,7 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
     width: 70px;
   }
   .solution-text {
-    font-size: 17px;
+    font-size: 25px;
     white-space: normal;
   }
 }
@@ -623,7 +700,6 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   padding:100px 24px 90px;
 
 }
-.about-section h2{color:#fff;}
 
 /* --- アコーディオン全体 --- */
 .acc-item {
@@ -690,6 +766,9 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   line-height: 1.6;
   color: #555;
 }
+.acc-photo{
+  display:none;
+}
 
 /* --- 開いているとき（is-active）の指定 --- */
 .acc-item.is-active .acc-content {
@@ -709,9 +788,18 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   gap:34px;
   align-items:center;
 }
-@media (max-width:768px){.about-card{grid-template-columns:1fr;}}
+@media (max-width:768px){.about-card{grid-template-columns:1fr;}
+.about-photo{display:none;}       
+  .acc-photo{                      
+    display:block;
+    width:100%;
+    height:auto;
+    object-fit:cover;
+    margin:14px 0;}
+  }
+.about-section h2{color:#0A605E;}
 .about-text h3{font-size:clamp(18px,2.4vw,22px); color:var(--teal-700); margin-bottom:16px;}
-.about-text p{font-size:14px; color:var(--ink-soft);}
+.about-text p{font-size:15px; color:var(--ink-soft);}
 .check-list{margin-top:20px;}
 .check-list li{
   position:relative; padding:8px 0 8px 18px; font-size:14px; font-weight:700; color:var(--ink);
@@ -726,45 +814,154 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
 /* ============================================================
    「BeEngineerで学べること」01/02/03
    ============================================================ */
-.learn-section{ margin:0 auto; padding:100px 0 100px 200px;  display:grid;
-  justify-content: end;}
-.learn-item{
-  background:rgb(255 255 255 / 50%);
-  padding:10px 100px 10px 30px;
-  display:grid;
-  grid-template-columns:100px 1fr 320px; /* 数字／文章／写真の3列 */
-  gap:60px;
-  align-items:center;
-  margin-bottom:70px;
+
+/* セクション全体 */
+.learn-section {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 80px 20px;
 }
-.learn-item:nth-of-type(2){padding:10px 150px 10px 30px; margin-left: -80px;}
-.learn-item:last-child{margin-bottom:0;} /* 一番最後の項目だけ下の余白を無くす */
-@media (max-width:820px){
-  .learn-item{grid-template-columns:70px 1fr;}
-  .learn-photo{grid-column:1 / -1; order:3;}
-  /* grid-column:1 / -1 ＝ 1列目から最後の列まで全部使う＝横いっぱいに広げる
-     order:3 ＝ 本来の並び順を無視して、一番最後に表示する（スマホでは写真を下に回す） */
+
+/* 各項目の白カード（PC版） */
+.learn-item {
+  background: rgba(255, 255, 255, 0.5); 
+  border-radius: 24px;
+  padding: 30px 40px;
+  margin-bottom: 40px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  
+  /* 3列のレイアウト：[数字] [テキスト] [写真] */
+  display: grid;
+  grid-template-columns: auto 1fr 300px;
+  gap: 30px;
+  align-items: center;
 }
-.learn-number{
-  font-family:var(--font-display); font-weight:800;
-  font-size:150px;
-  color:rgb(56 189 248 / 0.5);
-  transform: rotate(348deg);
-  margin-top: -100px;  /* 上に30px引っ張る */
-  margin-left: -80px; /* 左に50px引っ張る */
+
+.learn-item:last-child {
+  margin-bottom: 0;
 }
-.learn-text h1{font-size:32px; color:var(--teal-800); margin-bottom:12px;}
-.learn-text p{font-size:16px; color:var(--ink-soft);}
-.learn-photo{height:250px; width: 100%; background-size:cover; background-position:center;}
-.learn-photo--01{background-image: url('learn1.jpeg');}
-.learn-photo--02{background-image: url('learn2.jpg');}
-.learn-photo--03{background-image: url('learn3.jpeg');}
+
+/* 数字（01, 02, 03） */
+.learn-number {
+  font-family: var(--font-display, sans-serif);
+  font-weight: 800;
+  font-size: 100px;
+  line-height: 1;
+  color: #38BDF8; /* 画像に合わせた水色 */
+  opacity: 0.8;
+  transform: rotate(-12deg);
+  margin-right: 10px;
+}
+
+/* テキストエリア（PC版） */
+.learn-text h1 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #12797d;
+  margin: 0 0 15px 0;
+}
+
+.learn-text p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #333333;
+  margin: 0;
+}
+
+/* 写真 */
+.learn-photo {
+  width: 100%;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+}
+
+.learn-photo--01 { background-image: url('learn1.jpeg'); }
+.learn-photo--02 { background-image: url('learn2.jpg'); }
+.learn-photo--03 { background-image: url('learn3.jpeg'); }
+
+
+/* ===================================
+   スマホ版のスタイル（768px以下）
+   =================================== */
+@media (max-width: 768px) {
+  .same-bg{background:none;}
+  .learn-section {
+    padding: 50px 16px;
+    background-image: url('rectangle 59.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    background-position: center 40px;
+  }
+
+  /* SP版では全体を包む白カードを透明にする */
+  .learn-item {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    margin-bottom: 50px;
+    /* 2列のレイアウトに変更 */
+    grid-template-columns: auto 1fr;
+    gap: 12px 16px;
+  }
+
+  /* 
+   ★魔法のコード★
+   .learn-textの枠を解除し、中身のh1とpを直接グリッドの要素として操作できるようにする
+  */
+  .learn-text {
+    display: contents;
+  }
+
+  /* ① 1行目・左：数字 */
+  .learn-number {
+    font-size: 64px;
+    grid-column: 1;
+    grid-row: 1;
+    margin: 0;
+    border-radius: 16px;
+  }
+  
+
+  /* ② 1行目・右：タイトル */
+  .learn-text h1 {
+    font-size: 24px;
+    margin: 0;
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center; /* 縦方向の中央に配置 */
+  }
+
+  /* ③ 2行目：写真（横幅いっぱい） */
+  .learn-photo {
+    grid-column: 1 / 3; /* 1列目から最後まで広げる */
+    grid-row: 2;
+    height: 200px;
+  }
+
+  /* ④ 3行目：本文（ここだけ白カードにする） */
+  .learn-text p {
+    grid-column: 1 / 3;
+    grid-row: 3;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 16px;
+    padding: 30px 20px 20px;
+    font-size: 14px;
+    line-height: 1.6;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    margin-top: -30px; /* 写真と少し近づける */
+  }
+}
 
 /* ============================================================
    VOICE（受講者の声）＋ 作品紹介
    ============================================================ */
 .voice-section {
-  padding: 100px 0;
+  padding: 0;
+  background:#fff;
   background-image: url('rectangle 75.svg'); 
   background-size: cover;
   background-repeat: no-repeat;
@@ -779,6 +976,7 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   display: flex;
   gap: 40px;               /* カード同士の間隔 */
   overflow-x: scroll;
+  padding-top:-30px;
 
   /* ▼ 余白の調整 ▼ */
   /* 左側：コンテンツの位置に合わせた余白（計算式） / 右側：最後のカード用の最低限の余白 */
@@ -913,7 +1111,7 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
 }
 
 /*=====================*/
-.works-section { padding: 90px 0px 0px; }
+.works-section { padding:0px; }
 .works-title { margin-top: 80px; text-align: center; } 
 .works-panel {
   background: #fff;
@@ -1000,7 +1198,7 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
 .lesson-calendar{background:#fff; border:2px solid #0A605E; border-radius:var(--radius-md); padding:20px; flex:1;}
 .lesson-calendar .sun{color:#ff0000;}
 .toggle-switch{display:inline-flex; border:2px solid #0A605E; border-radius:999px; padding:3px; background:#fff;}
-.toggle-option{border:none; background:transparent; padding:6px 16px; font-size:16px; font-weight:bold; color:#0A605E; cursor:pointer; transition:all 0.2s ease;}
+.toggle-option{border:none; background:transparent; padding:6px 16px; font-size:20px; font-weight:bold; color:#0A605E; cursor:pointer; transition:all 0.2s ease;}
 .toggle-option.active{background:#0A605E; color:#fff; border-radius:999px;} 
 .lesson-detail{display:flex; justify-content:flex-start; align-items:center; padding:24px 0; margin:0 10px; border-bottom:1px solid var(--teal-200); gap:20px; text-align:center;}
 .lesson-detail:last-child{border-bottom:none;}
@@ -1008,6 +1206,13 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
 .lesson-name{font-size:20px;}
 .school-map{background:#fff; border:2px solid #0A605E; border-radius:var(--radius-md); padding:20px;  flex:1; text-align:left;}
 .school-map iframe{width:100%; height:220px; border-radius:var(--radius-md);}
+/* 校舎コンテンツの切り替え用 */
+.school-content {
+  display: none; /* 基本は全て隠す */
+}
+.school-content.active {
+  display: block; /* activeがついた箱だけ表示する */
+}
 
 .detail-price{display:flex; gap:60px; margin-top:20px; justify-content:center;}
 .price-card1{flex:1; border-radius:50px; padding:20px; text-align:center;
@@ -1133,7 +1338,7 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   background:none; border:none; text-align:left;
   padding:18px 30px; font-size:20px; font-weight:500; color:var(--ink);
 }
-.faq-icon{flex-shrink:0; color:var(--teal-600); font-size:40px; transition:transform .2s ease;}
+.faq-icon{flex-shrink:0; color:var(--teal-600); font-size:40px; transition:transform .2s ease; padding:0 0 10px 0;}
 .faq-item.is-open .faq-icon{transform:rotate(180deg);}
 /* is-open クラスがJSで付くと矢印アイコンが180度回転して「上向き」になる */
 .faq-a{
