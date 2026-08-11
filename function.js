@@ -92,10 +92,18 @@ function switchSchool(schoolId, btnElement) {
 }
 
 // ===== schedule type toggle (無料体験 / 講座) =====
-document.querySelectorAll('.toggle-option').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.toggle-option').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+document.querySelectorAll('.toggle-switch').forEach(toggleSwitch => {
+  const options = toggleSwitch.querySelectorAll('.toggle-option');
+  const calendar = toggleSwitch.closest('.lesson-calendar');
+  options.forEach(btn => {
+    btn.addEventListener('click', () => {
+      options.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const type = btn.dataset.type;
+      calendar.querySelectorAll('.lesson-list').forEach(list => {
+        list.hidden = (list.dataset.type !== type);
+      });
+    });
   });
 });
 
@@ -115,7 +123,7 @@ const accTitles = document.querySelectorAll('.acc-title');
 const accItems = document.querySelectorAll('.acc-item');   // ← 追加：項目一覧をまとめて取得
 const aboutImg = document.getElementById('aboutImg');
 
-const AUTO_ROTATE_MS = 8000; // 自動で切り替わる間隔（ミリ秒）。
+const AUTO_ROTATE_MS = 10000; // 自動で切り替わる間隔（ミリ秒）。
 document.documentElement.style.setProperty('--rotate-ms', AUTO_ROTATE_MS + 'ms');
 let rotateTimer = null;      // setIntervalのIDを覚えておくための箱
 

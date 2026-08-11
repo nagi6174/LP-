@@ -1,5 +1,5 @@
 :root{
-  --teal-900:#0e4f49;   /* 一番濃いティール色（見出し文字など） */
+  --teal-900:#0e4f49;  
   --teal-800:#12665e;
   --teal-700:#177a70;
   --teal-600:#1c8f83;
@@ -7,24 +7,24 @@
   --teal-400:#5cc7b7;
   --teal-300:#8fdccb;
   --teal-200:#bdece0;
-  --teal-100:#e2f6f0;   /* 一番薄いティール色（背景など） */
-  --bg-pale:#eaf6f6;    /* セクションの背景色 */
+  --teal-100:#e2f6f0; 
+  --bg-pale:#eaf6f6;   
   --bg-blue-pale:#eef6f8;
-  --pink-600:#ea3f61;   /* CTAボタンなどのピンク色 */
+  --pink-600:#ea3f61;   
   --pink-700:#d72c50;
-  --gold-500:#dcae00;   /* 料金カードの金色アクセント */
+  --gold-500:#dcae00;  
   --gold-100:#fdf6dc;
-  --ink:#22322f;        /* 本文の文字色（黒に近い色） */
-  --ink-soft:#4a5a57;   /* 少し薄めの文字色（説明文など） */
+  --ink:#22322f;      
+  --ink-soft:#4a5a57;  
   --white:#ffffff;
-  --radius-lg:22px;     /* カードなどの角丸の大きさ（大） */
-  --radius-md:14px;     /* 角丸（中） */
-  --radius-sm:8px;      /* 角丸（小） */
-  --shadow-card:0 10px 30px rgba(14,79,73,.10); /* カードの影 */
-  --font-display:'M PLUS Rounded 1c', 'Noto Sans JP', sans-serif; /* 見出し用フォント */
-  --font-body:'Gothic A1', sans-serif;    /* 本文用フォント */
-  --font-mono:'JetBrains Mono', monospace;   /* コード風の等幅フォント */
-  --maxw:1180px; /* コンテンツの最大幅（これ以上は横に広がらない） */
+  --radius-lg:22px;     
+  --radius-md:14px;   
+  --radius-sm:8px;      
+  --shadow-card:0 10px 30px rgba(14,79,73,.10); 
+  --font-display:'M PLUS Rounded 1c', 'Noto Sans JP', sans-serif; 
+  --font-body:'Gothic A1', sans-serif;  
+  --font-mono:'JetBrains Mono', monospace;   
+  --maxw:1180px;
 
   --band-h: clamp(200px, 25vw, 360px);
 
@@ -33,55 +33,42 @@
   --bg-color1:#EFF6FF;
 }
 
-/* ---- リセット・共通設定 ----
-   ブラウザは要素ごとに初期値（余白など）が微妙に違うため、
-   最初に共通のルールを決めて表示のズレを防ぐ */
 *,*::before,*::after{
   box-sizing:border-box;
-  /* box-sizing:border-box にすると、
-     width/heightの中にpaddingとborderの分も含めて計算されるようになり、
-     サイズ計算がシンプルになる（初心者がハマりやすいポイント） */
 }
 html{
-  scroll-behavior:smooth;   /* リンクをクリックしたときページ内をカクッとではなく、なめらかにスクロールする */
-  scroll-padding-top:77px;  /* 固定ヘッダーに見出しが隠れないよう、スクロール時に上の余白を確保する */
+  scroll-behavior:smooth;   
+  scroll-padding-top:77px;  
 }
 @media(max-width:768px){
   html{scroll-padding-top:62px;} 
 }
 body{
-  margin:0;                 /* ブラウザ標準で付いている外側の余白を消す */
+  margin:0;               
   font-family:var(--font-body);
   color:var(--ink);
   background:var(--bg-color1);
-  -webkit-font-smoothing:antialiased; /* 文字のふちを少し滑らかに見せる */
-  overflow-x:hidden;         /* 横方向にスクロールバーが出てしまうのを防ぐ */
+  -webkit-font-smoothing:antialiased; 
+  overflow-x:hidden;         
 }
-img{max-width:100%; display:block;} /* 画像が親要素からはみ出さないようにする */
-a{color:inherit; text-decoration:none;} /* リンクの色・下線をリセットして、自分で指定した色を使う */
-ul{list-style:none; margin:0; padding:0;} /* 箇条書きの「・」マークと余白を一旦消す */
+img{max-width:100%; display:block;} 
+a{color:inherit; text-decoration:none;}
+ul{list-style:none; margin:0; padding:0;} 
 h1,h2,h3,h4{font-family:var(--font-display); margin:0; color:var(--teal-900);}
-p{margin:0; line-height:1.85;} /* line-height：行と行の間の広さ（読みやすさに直結する） */
-button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗せると指マークになる */
+p{margin:0; line-height:1.85;} 
+button{font-family:inherit; cursor:pointer;} 
 :focus-visible{outline:3px solid var(--pink-600); outline-offset:2px;}
-/* :focus-visible ＝ キーボードのTabキーで要素を選んだときに、
-   ここまで来ていますよ、と分かるように枠線を付ける（アクセシビリティ対応） */
 
 @media (prefers-reduced-motion: reduce){
   *{animation-duration:.001ms !important; transition-duration:.001ms !important;}
 }
-/* ↑ 「アニメーションを減らす」設定をしている人（画面酔いしやすい人など）向けに、
-     すべてのアニメーションをほぼ一瞬で終わらせるための配慮 */
 
-/* ---- セクション共通の見出し（VOICE・DETAILなど）のスタイル ---- */
 .section-title{
   text-align:center;
   font-size:clamp(1.75rem, 1.266rem + 2.07vw, 3.125rem);
-  /* clamp(最小,標準,最大) ＝ 画面の幅に応じて自動でサイズを調整しつつ、
-     小さくなりすぎたり大きくなりすぎたりしないようにする便利な書き方 */
   font-weight:800;
   color:var(--teal-700);
-  letter-spacing:.04em; /* 文字と文字の間隔を少し広げる */
+  letter-spacing:.04em; 
   margin-bottom:36px;
 }
 
@@ -91,16 +78,14 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
 .btn{
   display:inline-block;
   border:none;
-  border-radius:999px; /* 999pxのような大きい値にすると「完全な丸（カプセル型）」になる */
+  border-radius:999px; 
   font-family:var(--font-display);
   font-weight:700;
   cursor:pointer;
   text-align:center;
   transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
-  /* transition＝プロパティが変化するときに、瞬間ではなく0.18秒かけて滑らかに変化させる */
 }
 .btn-cta{
-  /* 赤（ピンク）のグラデーションがかかった、目立たせたいメインボタン */
   background:linear-gradient(135deg,var(--pink-600),var(--pink-700));
   color:#fff;
    padding:14px clamp(24px, 10vw, 300px);
@@ -109,11 +94,10 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   max-width:100%;
 }
 .btn-cta:hover{
-  /* :hover＝マウスが乗っているときだけ適用されるスタイル */
-  transform:translateY(-2px); /* 上に2pxだけ浮き上がる演出 */
+  transform:translateY(-2px); 
   box-shadow:0 12px 26px rgba(234,63,97,.45);
 }
-.header-cta{padding:10px 20px; font-size:13px;} /* ヘッダー内のボタンは少し小さめに上書き */
+.header-cta{padding:10px 20px; font-size:13px;} 
 .btn-outline-teal{
   background:#fff;
   color:var(--teal-700);
@@ -138,25 +122,23 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
    ヘッダー（ページ上部のナビゲーション）
    ============================================================ */
 .site-header{
-  position:sticky; /* スクロールしても画面上部に張り付いたままになる */
+  position:sticky; 
   top:0;
-  z-index:100; /* 他の要素より手前（上）に重なって表示されるようにする */
-  background:rgba(255,255,255,.92); /* 少し透明な白 */
-  backdrop-filter:blur(8px); /* 背景がうっすら透けて見える「すりガラス」効果 */
+  z-index:100; 
+  background:rgba(255,255,255,.92); 
+  backdrop-filter:blur(8px); 
   border-bottom:1px solid var(--teal-100);
 }
 
 .header-inner{
   max-width:var(--maxw);
-  margin:0 auto; /* 左右のmarginをautoにすると、要素が中央寄せになる */
-  display:flex; /* 中の要素を横並びにする */
-  align-items:center; /* 横並びにした要素を、縦方向の中央に揃える */
-  gap:22px; /* 並んでいる要素どうしの間隔 */
+  margin:0 auto; 
+  display:flex; 
+  align-items:center; 
+  gap:22px; 
   padding:6px 24px;
 }
 .logo{display:flex; flex-direction:column; line-height:1; margin-right:auto; font-family:var(--font-display); width:150px; height:65px;}
-/* margin-right:auto ＝ 右側の余白を自動で最大にする ＝ 結果として
-   「これより右にあるものを右端に寄せる」効果が生まれる（メニューを右寄せにするテクニック） */
 @media (max-width:768px){
   .logo{width:120px; height:50px;}
 }
@@ -164,50 +146,42 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
 .main-nav a{position:relative; padding:4px 0;}
 .main-nav a:hover{color:var(--teal-700);}
 .main-nav a::after{
-  /* ::after ＝ 要素の中身の「あと」に、新しい飾りを追加できる疑似要素。
-     ここではリンクの下に「線」を作っている */
   content:""; position:absolute; left:0; bottom:-2px; width:0; height:2px;
   background:var(--teal-500); transition:width .2s ease;
 }
 .main-nav a:hover::after{width:100%;}
-/* ↑ 普段は幅0（見えない）の線を、マウスが乗ったときだけ幅100%まで伸ばす
-     ＝ 下線がスーッと伸びるアニメーションになる */
 
 .hamburger{
-  display:none; /* パソコン画面では非表示。スマホ用のメディアクエリで表示に切り替える */
+  display:none; 
   background:none; border:none; width:32px; height:24px; position:relative; flex-shrink:0;
 }
 .hamburger span{
   position:absolute; left:0; right:0; height:2px; background:var(--teal-900);
   transition:transform .2s ease, opacity .2s ease;
 }
-.hamburger span:nth-child(1){top:0;}   /* 1本目の線の位置 */
-.hamburger span:nth-child(2){top:11px;} /* 2本目の線の位置 */
-.hamburger span:nth-child(3){top:22px;} /* 3本目の線の位置 */
-/* is-open クラスがJSで付け外しされることで「三本線」→「×印」に変化する */
+.hamburger span:nth-child(1){top:0;}   
+.hamburger span:nth-child(2){top:11px;} 
+.hamburger span:nth-child(3){top:22px;}
 .hamburger.is-open span:nth-child(1){transform:translateY(11px) rotate(45deg);}
-.hamburger.is-open span:nth-child(2){opacity:0;} /* 真ん中の線は消す */
+.hamburger.is-open span:nth-child(2){opacity:0;} 
 .hamburger.is-open span:nth-child(3){transform:translateY(-11px) rotate(-45deg);}
 
 .mobile-nav{
-  display:none; /* 普段は非表示。JSがis-openを付けると表示される（下の.is-openルール参照） */
+  display:none; 
   flex-direction:column; gap:2px; padding:8px 24px 18px;
   background:#fff; border-top:1px solid var(--teal-100);
 }
 .mobile-nav a{padding:12px 4px; font-size:15px; border-bottom:1px solid var(--teal-100);}
 .mobile-nav .btn{margin-top:12px; text-align:center;}
 
-/* ---- スマホなど画面が狭いときだけ適用されるルール ----
-   @media (max-width:920px) ＝ 画面幅が920px以下のときだけ、
-   { } の中のスタイルが有効になる（レスポンシブ対応の基本の書き方） */
-@media (max-width:920px){
-  .main-nav, .header-cta{display:none;}   /* パソコン用メニューを隠す */
-  .hamburger{display:block;}               /* 代わりにハンバーガーボタンを表示 */
-  .mobile-nav.is-open{display:flex;}       /* JSでis-openが付いたときだけメニューを開く */
+@media (max-width:768px){
+  .main-nav, .header-cta{display:none;}   
+  .hamburger{display:block;}               
+  .mobile-nav.is-open{display:flex;}      
 }
 
 /* ============================================================
-   ヒーロー（ファーストビュー：写真＋見出し部分）
+   ファーストビュー
    ============================================================ */
   /* =======================================
    1. 1920px 〜 995px (PC表示)
@@ -235,13 +209,6 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   display: block;
 }
 
-/* 
-  ▼ 重なりと隙間防止の計算式
-  1920pxのときでも左右の写真が中央に届く十分な幅を保ち、
-  画面が縮むにつれて真ん中の写真へ被さっていきます！
-*/
-
-/* 左の写真 */
 .photo-left {
   left: 0;
   width: calc(477px + (100vw - 1440px) / 2);
@@ -250,7 +217,6 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   z-index: 2; 
 }
 
-/* 中央の写真（真ん中に固定） */
 .photo-center {
   left: 50%;
   transform: translateX(-50%);
@@ -258,7 +224,6 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   z-index: 1; 
 }
 
-/* 右の写真 */
 .photo-right {
   right: 0;
   width: calc(477px + (100vw - 1440px) / 2); 
@@ -290,13 +255,12 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
     display: none;
   }
 
-  /* 重ならずに、元の写真の比率（477:517）を保って横並びで縮める */
   .photo-left {
-    width: 47.99%; /* 477 / 994 */
+    width: 50%; 
   }
 
   .photo-right {
-    width: 52.01%; /* 517 / 994 */
+    width: 50%; 
   }
 }
 
@@ -307,7 +271,7 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
 @media (max-width: 768px) {
   .photo-left,
   .photo-right {
-    width: 50%; /* 幅は半分ずつ */
+    width: 50%; 
   }
 }
 
@@ -315,16 +279,15 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* 上下左右のピッタリ中央に配置 */
-  z-index: 10; /* 写真（z-index: 1〜2）より手前に表示 */
+  transform: translate(-50%, -50%);
+  z-index: 10; 
   text-align: center;
-  background-color: #ffffff; /* 文字色（背景画像に合わせて調整してください） */
-  pointer-events: none; /* 写真へのクリック・タップを邪魔しない設定 */
+  background-color: #ffffff; 
 }
 
 .fv-text h1 {
   color: var(--color2);
-  font-size:clamp(1.625rem, 1.031rem + 2.54vw, 3.313rem); /* 画面幅に合わせて滑らかに伸縮 */
+  font-size:clamp(1.625rem, 1.031rem + 2.54vw, 3.313rem);
   font-weight: bold;
   font-weight:700;
   letter-spacing: 0.08em;
@@ -335,23 +298,13 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
 .pink{color:#F43F5E;}
 
 
-
-
-
-/* ============================================================
-   斜めにカットされた帯（ヒーロー写真の下のつなぎ目）
-   ============================================================ */
 .diagonal-divider{
   height:var(--band-h);
-  margin-top:clamp(-40px, -2.78vw, -24px);    /* 1440px時点で-40pxになる割合 */
+  margin-top:clamp(-40px, -2.78vw, -24px);    
   position:relative;
-  z-index:2;                  /* 写真より手前に表示する */
+  z-index:2;                  
   background:linear-gradient(100deg,var(--color1),var(--color2));
   clip-path:polygon(0% 0%, 100% 0%, 100% 65%, 0% 100%);
-  /* clip-path:polygon(...) ＝ 四角形の角の位置を指定して、
-     斜めに切り取った形にする。
-     「0 35%」＝左上の角を、上から35%の高さまで下げる
-     　→ これにより上辺が左から右へ斜め上がりの線になる */
 }
 
 
@@ -381,40 +334,41 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
 
 
 .course-cards{
-  display:grid; /* grid＝縦横のマス目でレイアウトする仕組み。flexより「表」に近い並べ方が得意 */
+  display:grid;
   gap:40px;
   text-align:left;
   grid-template-columns: repeat(2, 1fr);
-   margin: 0 auto;
-   max-width: 1000px; 
+  margin: 0 auto;
+  max-width: 1000px; 
 }
 .course-cards--single {
-  grid-template-columns: 1fr; /* 1列にする */
-  max-width: 480px;            /* カード1枚分の適切な幅に制限 */
-  margin: 0 auto;             /* これでブロック全体が中央寄せになります */
+  grid-template-columns: 1fr; 
+  max-width: 480px;           
+  margin: 0 auto;        
 }
-@media (max-width:768px){.course-cards{grid-template-columns:1fr; gap:40px; max-width:480px}}
+@media (max-width:768px){
+.course-cards{grid-template-columns:1fr; gap:40px; max-width:480px}}
 .course-card{
   background:#fff;
-  border-radius:32px;              /* ← 22px→32pxで、もっと丸くする */
-  box-shadow:0 16px 40px rgba(14,79,73,.16); /* ← 影を少し強く・広く */
+  border-radius:32px;              
+  box-shadow:0 16px 40px rgba(14,79,73,.16); 
   padding:28px;
   display:flex; flex-direction:column;
   gap:18px;
-  margin: 0;
+  margin:0;
 }
 
 .course-thumb{
   flex:1;
   min-height:0;
   border-radius:20px;
-  overflow:hidden;      /* ← 追加：中の写真の角も一緒に丸める */
-  background:var(--teal-100); /* 写真が読み込めなかったときの保険の背景色 */
+  overflow:hidden;      
+  background:var(--teal-100);
 }
 .course-thumb img{
   width:100%;
   height:100%;
-  object-fit:cover;     /* 写真の比率を保ったまま、枠いっぱいに敷き詰める */
+  object-fit:cover;    
 }
 .course-thumb--vibe{background:linear-gradient(135deg,#2c3e6b,#5b3e8f);}
 .course-thumb--vibe strong{font-family:var(--font-display); font-size:17px;}
@@ -424,7 +378,7 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
 .thumb-code{font-family:var(--font-mono); font-size:34px; color:var(--teal-300);}
 .course-card h3{
   padding:0;
-  font-size:clamp(20px, 2.22vw, 32px); /* ← 19px固定から、大きめの可変サイズに */
+  font-size:clamp(20px, 2.22vw, 32px); 
   font-weight:400;
   color:var(--ink); 
   text-align:center; 
@@ -434,40 +388,7 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   font-size:clamp(14px, 1.1vw, 16px);
   color:var(--ink-soft);
 }
-.duration{
-  margin:0;
-  font-size:clamp(12px, .9vw, 14px);
-  color:var(--ink-soft);   /* 画像ではピンクや緑ではなく、落ち着いた色に見えるため */
-  font-weight:400;
-}
 
-/* ---- 「こんな君に」の悩みバブル部分 ---- */
-.worries{max-width:900px; margin:80px auto 0; padding:0 24px; text-align:center;}
-.worries h2{font-size:clamp(24px,3.4vw,30px); color:var(--teal-800); margin-bottom:30px;}
-.bubble-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
-@media (max-width:768px){.bubble-grid{grid-template-columns:1fr ;}}
-.bubble{
-  position:relative;
-  background:#fff;
-  border:2px solid var(--teal-300);
-  border-radius:999px;
-  padding:16px 26px;
-  font-size:14px;
-  color:var(--ink-soft);
-}
-.chevron-down{
-  margin:34px 0 18px;
-  font-size:50px; line-height:1;
-  color:var(--teal-800);
-  transform:rotate(90deg); /* HTML内の「＞＞」の文字を90度回転させて「下向き矢印」に見せている */
-  display:inline-block;
-  font-weight:800;
-}
-.solve-line{display:flex; align-items:center; justify-content:center; gap:14px;}
-.thinking-icon{font-size:34px;}
-.solve-line p{font-size:19px; font-weight:700; color:var(--pink-600);}
-
-/* 全体レイアウト */
 
 .worries-section{
   position:relative;
@@ -484,34 +405,31 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   margin: 0 auto;
   padding: 20px;
 }
+
+
 @media (max-width: 768px) {
-  /* バブルのコンテナを1列（縦積み）に変更 */
   .thought-container {
     flex-direction: column;
     gap: 20px;
     padding: 10px;
   }
   
-  /* スマホ向けのバブル内文字サイズと余白の調整 */
   .thought-card {
     font-size: 16px;
     padding: 16px;
   }
   
-  /* 矢印（SVG）がスマホ画面からはみ出さないように縮小 */
   .arrow-double svg {
     width: 100%;
     max-width: 200px;
     height: auto;
   }
 
-  /* 右側のイラスト配置 */
   .person-img {
     right: 0;
     width: 200px;
   }
 
-  /* 下部のピンクテキスト */
   .solution-text {
     font-size: 25px;
     white-space: normal;
@@ -529,20 +447,16 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
 .thought-card {
   position: relative;
   background-color: #ffffff;
-  border: 2.5px solid #a3cac8; /* 画像に近い淡いくすみグリーン */
-  border-radius: 40px; /* しっかり丸みをつける */
+  border: 2.5px solid #a3cac8; 
+  border-radius: 40px; 
   padding: 18px 28px;
   font-size: 23px;
-  /* font-weight: bold; */
   line-height: 1.5;
   color: #222222;
   box-sizing: border-box;
   text-align: center;
 }
 
-/* -----------------------------------
- * 左側の吹き出し（左下に伸ばす丸）
- * ----------------------------------- */
 .bubble-left::before,
 .bubble-left::after {
   content: "";
@@ -552,7 +466,6 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   border-radius: 50%;
 }
 
-/* 1つ目の丸（中サイズ） */
 .bubble-left::before {
   width: 20px;
   height: 20px;
@@ -560,7 +473,6 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   bottom: -10px;
 }
 
-/* 2つ目の丸（小サイズ） */
 .bubble-left::after {
   width: 12px;
   height: 12px;
@@ -568,10 +480,6 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   bottom: -22px;
 }
 
-
-/* -----------------------------------
- * 右側の吹き出し（右下に伸ばす丸）
- * ----------------------------------- */
 .bubble-right::before,
 .bubble-right::after {
   content: "";
@@ -581,7 +489,6 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   border-radius: 50%;
 }
 
-/* 1つ目の丸（中サイズ） */
 .bubble-right::before {
   width: 20px;
   height: 20px;
@@ -589,7 +496,6 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   bottom: -10px;
 }
 
-/* 2つ目の丸（小サイズ） */
 .bubble-right::after {
   width: 12px;
   height: 12px;
@@ -597,7 +503,6 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   bottom: -22px;
 }
 
-/* 解決エリア全体 */
 .solution-section {
   position: relative;
   max-width: 960px;
@@ -605,7 +510,6 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   text-align: center;
 }
 
-/* 矢印とイラストを入れる中央エリア */
 .solution-middle {
   position: relative;
   display: flex;
@@ -615,32 +519,28 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   margin-bottom: 25px;
 }
 
-/* 二重矢印の調整 */
 .arrow-double {
   display: flex;
   justify-content: center;
 }
 
-/* 右側のイラスト配置 */
 .person-img {
   position: absolute;
-  right: 5%; /* 右からの距離 */
-  bottom: -10px; /* 位置の上下微調整 */
-  width: 140px;  /* イラストのサイズ */
+  right: 5%; 
+  bottom: -10px;
+  width: 140px;  
   height: auto;
 }
 
-/* 下部のピンクテキスト */
 .solution-text {
   font-size: 40px;
   font-weight: bold;
-  color: #f24d6d; /* 画像に近いピンク色 */
+  color:var(--pink-600);
   text-align: center;
   letter-spacing: 0.03em;
   margin: 0;
 }
 
-/* スマホ表示用の微調整 */
 @media (max-width: 768px) {
   .person-img {
     right: 0;
@@ -659,12 +559,8 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   position:relative;
   padding:80px 24px;
   background:
-    /* repeating-linear-gradient ＝ 同じ模様を繰り返す背景。
-       斜めの薄い線（ストライプ）模様を作っている */
     repeating-linear-gradient(115deg, rgba(255,255,255,.30) 0 26px, rgba(255,255,255,0) 26px 200px),
     #0ABAB5;
-    /* linear-gradient(160deg,var(--teal-400),var(--teal-600) 60%, var(--teal-800)); */
-  
   overflow:hidden;
 }
 .cta-card{
@@ -679,7 +575,7 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
 }
 .cta-card h2{font-size:clamp(2rem, 1.912rem + 0.38vw, 2.25rem); color:var(--teal-800); margin-bottom:18px;}
 .cta-card p{font-size:clamp(1rem, 0.824rem + 0.75vw, 1.5rem); color:var(--ink-soft);}
-.cta-card .highlight{color:var(--pink-600); font-weight:700;} /* HTML側の<span class="highlight">に対応 */
+.cta-card .highlight{color:var(--pink-600); font-weight:700;} 
 .cta-arrow{margin-top:18px; font-weight:700; color:var(--teal-700);}
 .cta-card .btn-cta{margin-top:22px;}
 
@@ -701,7 +597,6 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
 
 }
 
-/* --- アコーディオン全体 --- */
 .acc-item {
   position: relative;
   border-bottom: 1px solid #e5e7eb;
@@ -714,7 +609,6 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   border-bottom: none;
 }
 
-/* --- クリックする見出し部分 --- */
 .acc-title{
   margin: 0;
   font-size: 1.1rem;
@@ -728,7 +622,6 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   font-size: 1.8rem;
 }
 
-/* バーの土台（薄いグレー） */
 .acc-bar{
   position: absolute;
   left: 0; 
@@ -738,7 +631,6 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   background: #e5e7eb;
   overflow: hidden;
 }
-/* バーの塗り。is-activeが付いた瞬間だけ時間をかけて伸びる */
 .acc-bar-fill{
   display: block;
   width: 100%;
@@ -746,14 +638,13 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   background: #0ABAB5;
 }
 .acc-item.is-active .acc-bar-fill{
-  animation: accProgress var(--rotate-ms, 4000ms) linear forwards;
+  animation: accProgress var(--rotate-ms, 8000ms) linear forwards;
 }
 @keyframes accProgress{
   from{ height: 0%; }
   to{ height: 100%; }
 }
 
-/* --- 説明文エリア --- */
 .acc-content {
   max-height: 0;
   overflow: hidden;
@@ -770,7 +661,6 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   display:none;
 }
 
-/* --- 開いているとき（is-active）の指定 --- */
 .acc-item.is-active .acc-content {
   padding-top: 14px;
 }
@@ -784,7 +674,7 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   box-shadow:var(--shadow-card);
   padding:40px;
   display:grid;
-  grid-template-columns:1.3fr 1fr; /* 左：文章（少し広め）／右：写真 */
+  grid-template-columns:1.3fr 1fr;
   gap:34px;
   align-items:center;
 }
@@ -808,21 +698,19 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
 .check-list li::before{content:"｜"; position:absolute; left:0; color:var(--teal-500);}
 .about-photo{
   height:220px; border-radius:var(--radius-md);
-  background:linear-gradient(135deg,#dce9ec,#9fb9c4); /* 写真の代わりのプレースホルダー */
+  background:linear-gradient(135deg,#dce9ec,#9fb9c4);
 }
 
 /* ============================================================
-   「BeEngineerで学べること」01/02/03
+   「BeEngineerで学べること」
    ============================================================ */
 
-/* セクション全体 */
 .learn-section {
   max-width: 1000px;
   margin: 0 auto;
   padding: 80px 20px;
 }
 
-/* 各項目の白カード（PC版） */
 .learn-item {
   background: rgba(255, 255, 255, 0.5); 
   border-radius: 24px;
@@ -830,7 +718,6 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   margin-bottom: 40px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
   
-  /* 3列のレイアウト：[数字] [テキスト] [写真] */
   display: grid;
   grid-template-columns: auto 1fr 300px;
   gap: 30px;
@@ -841,19 +728,17 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   margin-bottom: 0;
 }
 
-/* 数字（01, 02, 03） */
 .learn-number {
   font-family: var(--font-display, sans-serif);
   font-weight: 800;
   font-size: 100px;
   line-height: 1;
-  color: #38BDF8; /* 画像に合わせた水色 */
+  color: #38BDF8; 
   opacity: 0.8;
   transform: rotate(-12deg);
   margin-right: 10px;
 }
 
-/* テキストエリア（PC版） */
 .learn-text h1 {
   font-size: 24px;
   font-weight: 700;
@@ -868,7 +753,6 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   margin: 0;
 }
 
-/* 写真 */
 .learn-photo {
   width: 100%;
   height: 200px;
@@ -897,26 +781,19 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
     background-position: center 40px;
   }
 
-  /* SP版では全体を包む白カードを透明にする */
   .learn-item {
     background: transparent;
     box-shadow: none;
     padding: 0;
     margin-bottom: 50px;
-    /* 2列のレイアウトに変更 */
     grid-template-columns: auto 1fr;
     gap: 12px 16px;
   }
 
-  /* 
-   ★魔法のコード★
-   .learn-textの枠を解除し、中身のh1とpを直接グリッドの要素として操作できるようにする
-  */
   .learn-text {
     display: contents;
   }
 
-  /* ① 1行目・左：数字 */
   .learn-number {
     font-size: 64px;
     grid-column: 1;
@@ -926,23 +803,20 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   }
   
 
-  /* ② 1行目・右：タイトル */
   .learn-text h1 {
     font-size: 24px;
     margin: 0;
     grid-column: 2;
     grid-row: 1;
-    align-self: center; /* 縦方向の中央に配置 */
+    align-self: center; 
   }
 
-  /* ③ 2行目：写真（横幅いっぱい） */
   .learn-photo {
-    grid-column: 1 / 3; /* 1列目から最後まで広げる */
+    grid-column: 1 / 3; 
     grid-row: 2;
     height: 200px;
   }
 
-  /* ④ 3行目：本文（ここだけ白カードにする） */
   .learn-text p {
     grid-column: 1 / 3;
     grid-row: 3;
@@ -952,12 +826,12 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
     font-size: 14px;
     line-height: 1.6;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    margin-top: -30px; /* 写真と少し近づける */
+    margin-top: -30px;
   }
 }
 
 /* ============================================================
-   VOICE（受講者の声）＋ 作品紹介
+   VOICE（受講者の声）
    ============================================================ */
 .voice-section {
   padding: 0;
@@ -969,32 +843,25 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   overflow: hidden;
 }
 
-/* スクロールコンテナ */
 .voice-scroll {
-  width: 100%;             /* 画面横幅いっぱいに広げる */
-  max-width: none;         /* max-width の制限を解除 */
+  width: 100%;     
+  max-width: none;  
   display: flex;
-  gap: 40px;               /* カード同士の間隔 */
+  gap: 40px;             
   overflow-x: scroll;
   padding-top:-30px;
-
-  /* ▼ 余白の調整 ▼ */
-  /* 左側：コンテンツの位置に合わせた余白（計算式） / 右側：最後のカード用の最低限の余白 */
   padding-left: min(calc(50vw - 600px + 24px), 160px);
   padding-right: 40px;
   padding-top: 10px;
   padding-bottom: 30px;
-  
-  /* ドラッグ・操作用の設定 */
   cursor: grab;
   user-select: none;
   -webkit-overflow-scrolling: touch;
-
   scrollbar-width: thin;
   scrollbar-color: #105955 #e0e0e0;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1024px) {
   .voice-scroll {
     padding-left: 24px;
   }
@@ -1009,55 +876,46 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   height:8px;
 }
 .voice-scroll::-webkit-scrollbar-track {
-  background: #e8f0f0;  /* 柔らかいグレー・ティール系 */
+  background: #e8f0f0; 
   border-radius: 10px;
   margin-left: 25%;
   margin-right: 25%;
 }
 
-/* 3. 移動する「つまみ」部分 */
 .voice-scroll::-webkit-scrollbar-thumb {
-  background: #105955;  /* カードの枠線と同じ深緑色 */
+  background: #105955;  
   border-radius: 10px;
 }
 
-/* つまみをホバーした時 */
 .voice-scroll::-webkit-scrollbar-thumb:hover {
-  background: #12797d;  /* 少し明るいティール色に */
+  background: #12797d; 
 }
 
-/* レスポンシブ時のバー余白調整 */
-@media (max-width: 1200px) {
+@media (max-width: 1024px) {
   .voice-scroll::-webkit-scrollbar-track {
     margin-left: 40px;
   }
 }
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .voice-scroll::-webkit-scrollbar-track {
     margin-left: 20px;
   }
 }
 
-/* 感想カード */
 .voice-card {
   background: #ffffff;
-  border: 2.5px solid #105955; /* 画像の濃いティール色の枠線 */
-  border-radius: 28px;        /* しっかり丸みのある角 */
+  border: 2.5px solid #105955;
+  border-radius: 28px;       
   padding: 36px 24px 30px;
-  
-  /* カードサイズ設定 */
   flex-shrink: 0;
-  width: 290px;              /* 画像の見た目に合わせた幅 */
-  min-height: 440px;         /* しっかり縦長に固定 */
-  
-  /* 中身の配置 */
+  width: 290px;             
+  min-height: 440px;
   display: flex;
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
 }
 
-/* 丸顔写真 */
 .voice-avatar {
   width: 80px;
   height: 80px;
@@ -1074,7 +932,6 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   object-fit: cover;
 }
 
-/* 学年・性別 */
 .voice-name {
   font-size: 22px;
   font-weight: 500;
@@ -1083,7 +940,6 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   text-align: center;
 }
 
-/* 生徒 / 保護者 */
 .voice-role {
   font-size: 22px;
   font-weight: 500;
@@ -1092,7 +948,6 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   text-align: center;
 }
 
-/* 区切り線 */
 .voice-divider {
   width: 100%;
   height: 3px;
@@ -1100,7 +955,6 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   margin-bottom: 20px;
 }
 
-/* 本文 */
 .voice-text {
   font-size: 16px;
   line-height: 1.7;
@@ -1110,7 +964,10 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   letter-spacing: 0.02em;
 }
 
-/*=====================*/
+/* ============================================================
+   過去の作品
+   ============================================================ */
+
 .works-section { padding:0px; }
 .works-title { margin-top: 80px; text-align: center; } 
 .works-panel {
@@ -1197,6 +1054,7 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
 .school-detail{background:rgb(10 186 181 / 5%); border-radius:var(--radius-md); padding:30px; margin-top:20px; display:flex; gap:50px; align-items:flex-start; padding:20px; justify-content: center;}
 .lesson-calendar{background:#fff; border:2px solid #0A605E; border-radius:var(--radius-md); padding:20px; flex:1;}
 .lesson-calendar .sun{color:#ff0000;}
+.lesson-calendar .sat{color:#0000ff;}
 .toggle-switch{display:inline-flex; border:2px solid #0A605E; border-radius:999px; padding:3px; background:#fff;}
 .toggle-option{border:none; background:transparent; padding:6px 16px; font-size:20px; font-weight:bold; color:#0A605E; cursor:pointer; transition:all 0.2s ease;}
 .toggle-option.active{background:#0A605E; color:#fff; border-radius:999px;} 
@@ -1206,12 +1064,11 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
 .lesson-name{font-size:20px;}
 .school-map{background:#fff; border:2px solid #0A605E; border-radius:var(--radius-md); padding:20px;  flex:1; text-align:left;}
 .school-map iframe{width:100%; height:220px; border-radius:var(--radius-md);}
-/* 校舎コンテンツの切り替え用 */
 .school-content {
-  display: none; /* 基本は全て隠す */
+  display: none; 
 }
 .school-content.active {
-  display: block; /* activeがついた箱だけ表示する */
+  display: block; 
 }
 
 .detail-price{display:flex; gap:60px; margin-top:20px; justify-content:center;}
@@ -1246,15 +1103,14 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
     padding: 0 4px 0px;
     border-bottom: 3px solid #0ABAB5;
     background: none;
-    flex: 0 0 calc(33.333% - 12px); /* 上段：1行に3つ */
+    flex: 0 0 calc(33.333% - 12px); 
     box-sizing: border-box;
     
   }
 
-  /* 下段の2つ（横浜校・首里校） */
   .detail-school button:nth-child(4),
   .detail-school button:nth-child(5) {
-    flex: 0 0 calc(40% - 12px); /* 下段：2つで中央寄り */
+    flex: 0 0 calc(40% - 12px); 
   }
 
   .detail-school button.active {
@@ -1274,9 +1130,7 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
     font-size: 12px;
     padding: 10px 24px;
   }
-  /* -----------------------------------
-   * 【1点前の状態】カレンダー ＆ マップ（縦積み設定）
-   * ----------------------------------- */
+  
   .school-detail {
     flex-direction: column;
     gap: 30px; 
@@ -1289,10 +1143,6 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
     box-sizing: border-box;
   }
 
-
-  /* -----------------------------------
-   * 【1点前の状態】料金カード（無料2枚1行 + Python1枚）
-   * ----------------------------------- */
   .detail-price {
     display: grid; 
     grid-template-columns: 1fr 1fr;
@@ -1301,8 +1151,8 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
   
   .price-card2 {
    grid-column: 1 / 3;
-   justify-self: center; /* ★カード自体をグリッド内の中央に配置 */
-    width: 60%;           /* ★中央に収まる幅感に指定（70%〜80%でお好みで調整可） */
+   justify-self: center; 
+    width: 60%;          
     box-sizing: border-box;
   }
 
@@ -1329,7 +1179,7 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
 
 
 /* ============================================================
-   FAQ（よくある質問）アコーディオン
+   FAQ（よくある質問）
    ============================================================ */
 .faq-section{max-width:1000px; margin:0 auto; padding:0 24px 100px;}
 .faq-item{border:3px solid #000; background:#fff;margin:20px 0; border-radius:50px;}
@@ -1340,14 +1190,11 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
 }
 .faq-icon{flex-shrink:0; color:var(--teal-600); font-size:40px; transition:transform .2s ease; padding:0 0 10px 0;}
 .faq-item.is-open .faq-icon{transform:rotate(180deg);}
-/* is-open クラスがJSで付くと矢印アイコンが180度回転して「上向き」になる */
 .faq-a{
-  max-height:0; /* 普段は高さ0にして中身を隠している */
+  max-height:0; 
   overflow:hidden;
-  transition:max-height .25s ease; /* 高さが変わるときだけ0.25秒かけてアニメーションする */
+  transition:max-height .25s ease; 
 }
-/* faq-a の実際の高さ（scrollHeight）は script.js が計算して
-   インラインスタイル（style="max-height:...px"）として直接書き込んでいる */
 .faq-a p{padding:0 20px 18px; margin:0 20px; font-size:20px; color:var(--ink-soft); }
 
 
@@ -1356,7 +1203,7 @@ button{font-family:inherit; cursor:pointer;} /* cursor:pointer＝マウスを乗
    申し込みフォーム
    ============================================================ */
 .form-section{max-width:640px; margin:0 auto; padding:100px 24px 110px;}
-.apply-form{display:flex; flex-direction:column; gap:20px;} /* 入力欄を縦に並べ、間隔を空ける */
+.apply-form{display:flex; flex-direction:column; gap:20px;} 
 .form-row{display:flex; flex-direction:column; gap:8px;} /* ラベルと入力欄を縦に並べる */
 .form-row--split{flex-direction:row; gap:16px;} /* 学年・学校名だけは横並びに上書き */
 .form-row--split label{flex:1; display:flex; flex-direction:column; gap:8px;}
